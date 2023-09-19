@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
+    public function artists()
+    {
+        return $this->hasMany(Artist::class);
+    }
+
+    public function isAdministrator()
+    {
+        return false;
+    }
 }
