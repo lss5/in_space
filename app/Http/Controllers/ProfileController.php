@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Artist;
 use App\Models\Record;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,13 +41,17 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function edit()
     {
-        //
+        $profile = Auth::user();
+
+        return view('profile.edit', [
+            'profile' => $profile,
+        ]);
     }
 
     /**
@@ -71,26 +77,21 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProfileRequest $request, $id)
     {
-        //
+        $profile = User::find($id);
+//        dd($profile);
+        $profile->name = $request->name;
+
+        $profile->save();
+
+        return redirect()->route('profile.index');
     }
 
     /**

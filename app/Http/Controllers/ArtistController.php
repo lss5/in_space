@@ -104,6 +104,9 @@ class ArtistController extends Controller
             abort(403);
         }
 
+        // TODO: Deleting relations Records
+        $artist->delete();
+
         return redirect()->route('artist.index');
     }
 }

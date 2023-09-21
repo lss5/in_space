@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="container">
-    <div class="row my-2">
-        <div class="col-12">
+    <div class="row bg-white py-5">
+        <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
             <h2>{{ __('artist.menu_name') }}</h2>
             <a href="{{ route('artist.create') }}" type="button" class="btn btn-success">{{ __('artist.btn_create') }}</a>

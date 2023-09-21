@@ -3,66 +3,30 @@
 @section('content')
 
 <div class="container">
-    <div class="row my-2">
-        <div class="col-12">
+    <div class="row bg-white py-5">
+        <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ __('profile.title') }}</h1>
             Имя: {{ $profile->name }}
 
-            <h2>{{ __('artist.menu_name') }}</h2>
-            @if($artists->count() > 0)
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Записей</th>
-                        <th scope="col">Последняя добавлена</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse ($artists as $artist)
-                        <tr>
-                        <th scope="row">{{ $artist->id }}</th>
-                        <td>{{ $artist->name }}</td>
-                        <td>{{ $artist->records->count() }}</td>
-                        <td>{{ $artist->updated_at }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @else
-                <div class="col-12">
-                    <h5>Артисты не созданы</h5>
-                </div>
-            @endif
+            <h2><a href="{{ route('artist.index') }}">{{ __('artist.menu_name') }}</a>: {{ $artists->count() }}</h2>
+        @if($artists->count() > 0)
+            {{--            @dd($artists)--}}
+            <h3>Последнее добавление: {{ $artists->first()->created_at }}</h3>
+        @else
+            <div class="col-12">
+                <h5>Записи не созданы</h5>
+            </div>
+        @endif
 
-            <h2>{{ __('record.menu_name') }}</h2>
-            @if($records->count() > 0)
-                <table class="table">
-                    <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Артист</th>
-                    <th scope="col">Дата добавления</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse ($records as $record)
-                        <tr>
-                        <th scope="row">{{ $record->id }}</th>
-                        <td>{{ $record->name }}</td>
-                        <td>{{ $record->artist->name }}</td>
-                        <td>{{ $record->updated_at }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <div class="col-12">
-                    <h5>Артисты не созданы</h5>
-                </div>
-            @endif
+            <h2><a href="{{ route('record.index') }}">{{ __('record.menu_name') }}</a>: {{ $records->count() }}</h2>
+        @if($records->count() > 0)
+{{--            @dd($records)--}}
+            <h3>Последнее добавление: {{ $records->first()->created_at }}</h3>
+        @else
+            <div class="col-12">
+                <h5>Записи не созданы</h5>
+            </div>
+        @endif
         </div>
     </div>
 </div>

@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="container">
-    <div class="row my-2">
-        <div class="col-12">
+    <div class="row bg-white py-5">
+        <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
             <h2>{{ __('record.menu_name') }}</h2>
             @if($records->count() > 0)
@@ -22,7 +22,13 @@
                         <tr>
                         <th scope="row">{{ $record->id }}</th>
                         <td>{{ $record->name }}</td>
-                        <td>{{ $record->artist->name }}</td>
+                        <td>
+                            @if($record->artist)
+                                {{ $record->artist->name }}
+                            @else
+                                {{ __('artist.deleted') }}
+                            @endif
+                        </td>
                         <td>{{ $record->updated_at }}</td>
                         </tr>
                     @endforeach

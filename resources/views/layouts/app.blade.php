@@ -51,6 +51,7 @@
                                 <a href="{{ route('profile.index') }}" class="dropdown-item">{{ __('profile.menu_name') }}</a>
                                 <a href="{{ route('artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                                 <a href="{{ route('record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
+                                <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
