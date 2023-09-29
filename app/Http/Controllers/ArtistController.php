@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Artist::class, 'artist');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,10 +38,6 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->cannot('create', Artist::class)) {
-            abort(403);
-        }
-
         return view('artist.create');
     }
 
@@ -60,12 +61,13 @@ class ArtistController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(Artist $artist)
     {
         return view('artist.show', [
             'artist' => $artist,
+            'records' => $artist->records()->get(),
         ]);
     }
 
@@ -73,11 +75,13 @@ class ArtistController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Artist $artist)
     {
-        //
+        return view('artist.edit', [
+            'artist' => $artist,
+        ]);
     }
 
     /**
@@ -85,11 +89,14 @@ class ArtistController extends Controller
      *
      * @param  \App\Http\Requests\UpdateArtistRequest  $request
      * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateArtistRequest $request, Artist $artist)
     {
-        //
+        $artist->name = $request->name;
+        $artist->save();
+
+        return redirect()->route('artist.show', $artist);
     }
 
     /**
@@ -100,10 +107,6 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        if (Auth::user()->cannot('delete', $artist)) {
-            abort(403);
-        }
-
         // TODO: Deleting relations Records
         $artist->delete();
 

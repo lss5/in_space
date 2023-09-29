@@ -6,8 +6,13 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
-            <h2>{{ __('artist.menu_name') }}</h2>
-            <a href="{{ route('artist.create') }}" type="button" class="btn btn-success">{{ __('artist.btn_create') }}</a>
+            <hr class="py-1">
+
+            <div class="d-flex justify-content-between my-2">
+                <h2 class="m-0">{{ __('artist.menu_name') }}</h2>
+                <a href="{{ route('artist.create') }}" type="button" class="btn btn-success">{{ __('button.create') }}</a>
+            </div>
+
             @if($artists->count() > 0)
                 <table class="table">
                     <thead>

@@ -6,6 +6,8 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
+            <hr class="py-1">
+
             <h2>{{ __('record.menu_name') }}</h2>
             @if($records->count() > 0)
                 <table class="table">

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 
 class StoreArtistRequest extends FormRequest
 {
@@ -14,13 +13,13 @@ class StoreArtistRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', Artist::class);
+        return true;
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'name' => Str::ucfirst(trim($this->name)),
+            'name' => trim($this->name),
             'description' => trim($this->description),
             'status' => 'created',
         ]);

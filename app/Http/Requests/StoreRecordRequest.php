@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Record;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRecordRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreRecordRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->artists->contains($this->artist);
     }
 
     /**
@@ -24,7 +25,10 @@ class StoreRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'artist' => ['required', 'integer', 'exists:artists,id'],
+            'name' => 'required|string|min:4|max:255',
+            'description' => 'nullable|string|max:4096',
+            'image' => 'nullable',
         ];
     }
 }

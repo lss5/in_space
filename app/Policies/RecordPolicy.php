@@ -18,7 +18,7 @@ class RecordPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class RecordPolicy
      */
     public function view(User $user, Record $record)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class RecordPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class RecordPolicy
      */
     public function update(User $user, Record $record)
     {
-        //
+        return true;
     }
 
     /**

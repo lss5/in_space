@@ -6,16 +6,40 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">{{ $artist->name }}</h1>
             <hr class="py-1">
-            <a href="{{ route('artist.index') }}" class="btn btn-light">{{ __('artist.btn_to_list') }}</a>
-            <a type="button" class="btn btn-outline-danger"
-                    onclick="event.preventDefault();
-                    document.getElementById('delete_form').submit();">
-                {{ __('artist.btn_delete') }}
-            </a>
-            <form id="delete_form" action="{{ route('artist.destroy', $artist) }}" method="POST" class="d-none">
-                @method('DELETE')
-                @csrf
-            </form>
+        @if($records->count() > 0)
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Артист</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Дата добавления</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse ($records as $record)
+                    <tr>
+                        <td>
+                            @if($record->artist)
+                                {{ $record->artist->name }}
+                            @else
+                                {{ __('artist.deleted') }}
+                            @endif
+                        </td>
+                        <td>{{ $record->name }}</td>
+                        <td>{{ $record->updated_at }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="col-12">
+                <h5>Записи не созданы</h5>
+            </div>
+        @endif
+            <hr class="py-1">
+            <a href="{{ route('record.create') }}" class="btn btn-success mx-1">{{ __('button.add_record') }}</a>
+            <a href="{{ route('artist.index') }}" class="btn btn-secondary mx-1">{{ __('button.to_list') }}</a>
+            <a href="{{ route('artist.edit', $artist) }}" class="btn btn-warning mx-1">{{ __('button.edit') }}</a>
         </div>
     </div>
 </div>

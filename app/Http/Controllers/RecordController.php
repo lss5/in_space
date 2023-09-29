@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
+use App\Models\Artist;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,9 +12,9 @@ class RecordController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->authorizeResource(Record::class, 'artist');
 //        $this->middleware('log')->only('index');
-        $this->middleware('auth')->except('index');
+//        $this->middleware('auth')->except('index');
     }
 
     /**
@@ -38,7 +39,9 @@ class RecordController extends Controller
      */
     public function create()
     {
-        //
+        return view('record.create', [
+            'artists' => Artist::where('user_id', '=', Auth::user()->id)->get(),
+        ]);
     }
 
     /**
@@ -49,7 +52,13 @@ class RecordController extends Controller
      */
     public function store(StoreRecordRequest $request)
     {
-        //
+        $record = new Record();
+        $record->name = $request->name;
+        $record->user()->associate(Auth::user()->id);
+        $record->artist()->associate($request->artist);
+        $record->save();
+
+        return redirect()->route('artist.show', $request->artist);
     }
 
     /**

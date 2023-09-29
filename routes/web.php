@@ -24,16 +24,14 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Artist
-Route::prefix('artist')->name('artist.')->group(function(){
+Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
     Route::get('/create', [ArtistController::class ,'create'])->name('create');
     Route::post('/', [ArtistController::class ,'store'])->name('store');
     Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
     Route::delete('/{artist}', [ArtistController::class ,'destroy'])->name('destroy');
-
-    Route::put('/{artist}', [ArtistController::class ,'update'])->name('update');
-
     Route::get('/{artist}/edit', [ArtistController::class ,'edit'])->name('edit');
+    Route::put('/{artist}', [ArtistController::class ,'update'])->name('update');
 });
 
 //Record

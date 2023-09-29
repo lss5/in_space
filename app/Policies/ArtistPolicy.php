@@ -31,7 +31,7 @@ class ArtistPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -43,7 +43,7 @@ class ArtistPolicy
      */
     public function view(User $user, Artist $artist)
     {
-        //
+        return $user->id === $artist->user_id;
     }
 
     /**
@@ -67,7 +67,7 @@ class ArtistPolicy
      */
     public function update(User $user, Artist $artist)
     {
-        //
+        return $user->id === $artist->user_id;
     }
 
     /**
