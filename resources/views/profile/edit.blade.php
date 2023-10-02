@@ -6,9 +6,16 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ __('profile.title') }}</h1>
-            <form method="POST" action="{{ route('profile.update', ['id'=> $profile->id]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('profile.update', ['user'=> $profile]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <div class="mb-3">
+                    <label for="image" class="form-label">Фотография профиля</label>
+                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                @error('image')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+                </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">{{ __('profile.form_email') }}</label>
                     <input class="form-control" type="text" value="{{ $profile->email }}" aria-label="{{ __('profile.form_email_prompt') }}" disabled readonly>
@@ -25,6 +32,7 @@
                     <textarea class="form-control" id="description" rows="3"></textarea>
                     <div id="descriptionHelpBlock" class="form-text">{{ __('profile.form_description_prompt') }}</div>
                 </div>
+                <!-- Buttons -->
                 <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('profile.btn_save') }}</button>
             </form>
         </div>

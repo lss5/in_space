@@ -5,6 +5,9 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">{{ $artist->name }}</h1>
+            @if($artist->images()->count() > 0))
+                <img src="{{ asset('storage/'.$artist->latestImage->link) }}" alt="">
+            @endif
             <hr class="py-1">
         @if($records->count() > 0)
             <table class="table">

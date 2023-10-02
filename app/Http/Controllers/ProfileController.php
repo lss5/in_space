@@ -80,16 +80,23 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request, $id)
+    public function update(UpdateProfileRequest $request, User $user)
     {
-        $profile = User::find($id);
-//        dd($profile);
-        $profile->name = $request->name;
+        if ($request->hasFile('image')) {
+            // delete old images
+            foreach ($user->images as $image) {
+                $image->delete();
+            }
+            //create new image with link new image
+            $user->images()->create([
+                'link' => $request->file('image')->store('user/'.$user->id.'/avatar', 'public'),
+            ]);
+        }
 
-        $profile->save();
+        $user->name = $request->name;
+        $user->save();
 
         return redirect()->route('profile.index');
     }

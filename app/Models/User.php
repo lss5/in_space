@@ -51,6 +51,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Artist::class);
     }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'parent');
+    }
+    public function latestImage()
+    {
+        return $this->morphOne(Image::class, 'parent')->latestOfMany();
+    }
 
     public function isAdministrator()
     {

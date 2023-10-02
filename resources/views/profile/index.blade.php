@@ -7,10 +7,12 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ __('profile.title') }}</h1>
             Имя: {{ $profile->name }}
-
+            <hr class="py-1">
+        @if($profile->images()->count() > 0)
+            <img src="{{ asset('storage/'.$profile->latestImage->link) }}" alt="">
+        @endif
             <h2><a href="{{ route('artist.index') }}">{{ __('artist.menu_name') }}</a>: {{ $artists->count() }}</h2>
         @if($artists->count() > 0)
-            {{--            @dd($artists)--}}
             <h3>Последнее добавление: {{ $artists->first()->created_at }}</h3>
         @else
             <div class="col-12">

@@ -48,7 +48,7 @@ Route::prefix('record')->name('record.')->group(function(){
 Route::prefix('profile')->name('profile.')->group(function() {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::get('/edit', [ProfileController::class ,'edit'])->name('edit');
-    Route::put('/{id}', [ProfileController::class ,'update'])->name('update');
+    Route::put('/{user}', [ProfileController::class ,'update'])->name('update');
 });
 
 

@@ -54,6 +54,12 @@ class ArtistController extends Controller
         $artist->user_id = Auth::user()->id;
         $artist->save();
 
+        if ($request->hasFile('image')) {
+            $artist->images()->create([
+                'link' => $request->file('image')->store('user/'.$artist->user_id.'/artists', 'public'),
+            ]);
+        }
+
         return redirect()->route('artist.index');
     }
 
@@ -93,6 +99,17 @@ class ArtistController extends Controller
      */
     public function update(UpdateArtistRequest $request, Artist $artist)
     {
+        if ($request->hasFile('image')) {
+            // delete old images
+            foreach ($artist->images as $image) {
+                $image->delete();
+            }
+            //create new image with link new image
+            $artist->images()->create([
+                'link' => $request->file('image')->store('user/'.$artist->user_id.'/artists', 'public'),
+            ]);
+        }
+
         $artist->name = $request->name;
         $artist->save();
 
@@ -108,6 +125,10 @@ class ArtistController extends Controller
     public function destroy(Artist $artist)
     {
         // TODO: Deleting relations Records
+        foreach ($artist->images as $image) {
+            $image->delete();
+        }
+
         $artist->delete();
 
         return redirect()->route('artist.index');

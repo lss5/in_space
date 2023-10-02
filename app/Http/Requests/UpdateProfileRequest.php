@@ -21,8 +21,6 @@ class UpdateProfileRequest extends FormRequest
     {
         $this->merge([
             'name' => trim($this->name),
-//            'description' => trim($this->description),
-//            'status' => 'created',
         ]);
     }
 
@@ -35,6 +33,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:4|max:100',
+            'image' => 'nullable|file|image|max:5000|dimensions:min_width=500,min_height=400',
         ];
     }
 }

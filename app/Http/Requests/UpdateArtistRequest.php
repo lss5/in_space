@@ -36,8 +36,7 @@ class UpdateArtistRequest extends FormRequest
         return [
             'name' => 'required|string|min:4|max:255',
             'description' => 'nullable|string|max:4096',
-//            'image' => 'required|file|image|max:5000|dimensions:min_width=500,min_height=400',
-            'image' => 'nullable',
+            'image' => 'nullable|file|image|max:5000|dimensions:min_width=500,min_height=400',
         ];
     }
 }
