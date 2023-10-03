@@ -18,11 +18,10 @@ use App\Http\Controllers\ArtistController;
 |
 */
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::get('/', [IndexController::class, 'index'])->name('index');
 // Artist
 Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
