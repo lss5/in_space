@@ -91,7 +91,7 @@ class ProfileController extends Controller
             }
             //create new image with link new image
             $user->images()->create([
-                'link' => $request->file('image')->store('user/'.$user->id.'/avatar', 'public'),
+                'link' => $request->file('image')->store('user/'.$user->id.'/images/avatar', 'public'),
             ]);
         }
 

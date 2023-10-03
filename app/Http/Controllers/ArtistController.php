@@ -56,7 +56,7 @@ class ArtistController extends Controller
 
         if ($request->hasFile('image')) {
             $artist->images()->create([
-                'link' => $request->file('image')->store('user/'.$artist->user_id.'/artists', 'public'),
+                'link' => $request->file('image')->store('user/'.$artist->user_id.'/images/artists', 'public'),
             ]);
         }
 
@@ -106,7 +106,7 @@ class ArtistController extends Controller
             }
             //create new image with link new image
             $artist->images()->create([
-                'link' => $request->file('image')->store('user/'.$artist->user_id.'/artists', 'public'),
+                'link' => $request->file('image')->store('user/'.$artist->user_id.'/images/artists', 'public'),
             ]);
         }
 

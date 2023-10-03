@@ -12,7 +12,7 @@ class RecordController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Record::class, 'artist');
+        $this->authorizeResource(Record::class, 'record');
 //        $this->middleware('log')->only('index');
 //        $this->middleware('auth')->except('index');
     }
@@ -58,6 +58,12 @@ class RecordController extends Controller
         $record->artist()->associate($request->artist);
         $record->save();
 
+        if ($request->hasFile('image')) {
+            $record->images()->create([
+                'link' => $request->file('image')->store('user/'.$record->user_id.'/images/records', 'public'),
+            ]);
+        }
+
         return redirect()->route('artist.show', $request->artist);
     }
 
@@ -69,7 +75,9 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        //
+        return view('record.show', [
+            'record' => $record,
+        ]);
     }
 
     /**
@@ -80,7 +88,9 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        //
+        return view('record.edit', [
+            'record' => $record,
+        ]);
     }
 
     /**
@@ -92,7 +102,21 @@ class RecordController extends Controller
      */
     public function update(UpdateRecordRequest $request, Record $record)
     {
-        //
+        if ($request->hasFile('image')) {
+            // delete old images
+            foreach ($record->images as $image) {
+                $image->delete();
+            }
+            //create new image with link new image
+            $record->images()->create([
+                'link' => $request->file('image')->store('user/'.$record->user_id.'/images/records', 'public'),
+            ]);
+        }
+
+        $record->name = $request->name;
+        $record->save();
+
+        return redirect()->route('record.show', $record);
     }
 
     /**
@@ -103,6 +127,11 @@ class RecordController extends Controller
      */
     public function destroy(Record $record)
     {
-        //
+        foreach ($record->images as $image) {
+            $image->delete();
+        }
+        $record->delete();
+
+        return redirect()->route('artist.show', $record->artist);
     }
 }

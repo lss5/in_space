@@ -11,6 +11,20 @@ class RecordPolicy
     use HandlesAuthorization;
 
     /**
+     * Perform pre-authorization checks.
+     *
+     * @param  \App\Models\User  $user
+     * @param string $ability
+     * @return void|bool
+     */
+    public function before(User $user, $ability)
+    {
+        if ($user->isAdministrator()) {
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
@@ -53,7 +67,7 @@ class RecordPolicy
      */
     public function update(User $user, Record $record)
     {
-        return true;
+        return $user->id === $record->user_id;
     }
 
     /**
@@ -65,7 +79,7 @@ class RecordPolicy
      */
     public function delete(User $user, Record $record)
     {
-        //
+        return $user->id === $record->user_id;
     }
 
     /**

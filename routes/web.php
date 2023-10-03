@@ -27,19 +27,20 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
     Route::get('/create', [ArtistController::class ,'create'])->name('create');
-    Route::post('/', [ArtistController::class ,'store'])->name('store');
     Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
-    Route::delete('/{artist}', [ArtistController::class ,'destroy'])->name('destroy');
+    Route::post('/', [ArtistController::class ,'store'])->name('store');
     Route::get('/{artist}/edit', [ArtistController::class ,'edit'])->name('edit');
     Route::put('/{artist}', [ArtistController::class ,'update'])->name('update');
+    Route::delete('/{artist}', [ArtistController::class ,'destroy'])->name('destroy');
 });
 
 //Record
 Route::prefix('record')->name('record.')->group(function(){
     Route::get('/', [RecordController::class ,'index'])->name('index');
     Route::get('/create', [RecordController::class ,'create'])->name('create');
-    Route::post('/', [RecordController::class ,'store'])->name('store');
+    Route::get('/{record}', [RecordController::class ,'show'])->name('show');
     Route::get('/{record}/edit', [RecordController::class ,'edit'])->name('edit');
+    Route::post('/', [RecordController::class ,'store'])->name('store');
     Route::put('/{record}', [RecordController::class ,'update'])->name('update');
     Route::delete('/{record}', [RecordController::class ,'destroy'])->name('destroy');
 });

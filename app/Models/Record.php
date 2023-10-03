@@ -30,6 +30,14 @@ class Record extends Model
     {
         return $query->where('user_id', $user->id);
     }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'parent');
+    }
+    public function latestImage()
+    {
+        return $this->morphOne(Image::class, 'parent')->latestOfMany();
+    }
 
 }
 

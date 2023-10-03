@@ -23,7 +23,7 @@
                                 <option value="{{ $artist->id }}" @if(old('country') == $artist->id) selected @endif>{{ $artist->name }}</option>
                             @endforeach
                         </select>
-                        <small class="form-text text-muted">Manufacturer your hardware</small>
+                        <small class="form-text text-muted">Выберите Артиста из списка доступных</small>
                     </div>
                 </div>
 
@@ -32,22 +32,13 @@
                         <label class="mb-0">{{ __('record.form_create_image') }}</label>
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @error('image')
-                                    <small class="form-text text-danger">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-
-                                <div class="input-group">
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image">
-    {{--                                <label class="input-group-text" for="image">Upload</label>--}}
-                                </div>
-
-                                <small class="form-text text-muted">{{ __('record.form_create_image_prompt') }}</small>
-                            </div>
-                        </div>
+                    @error('image')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image">
+                        <small class="form-text text-muted">{{ __('record.form_create_image_prompt') }}</small>
                     </div>
                 </div>
 

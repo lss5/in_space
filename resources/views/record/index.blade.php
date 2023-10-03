@@ -14,8 +14,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Название</th>
                         <th scope="col">Артист</th>
+                        <th scope="col">Название</th>
                         <th scope="col">Дата добавления</th>
                     </tr>
                     </thead>
@@ -23,7 +23,6 @@
                     @forelse ($records as $record)
                         <tr>
                         <th scope="row">{{ $record->id }}</th>
-                        <td>{{ $record->name }}</td>
                         <td>
                             @if($record->artist)
                                 {{ $record->artist->name }}
@@ -31,6 +30,7 @@
                                 {{ __('artist.deleted') }}
                             @endif
                         </td>
+                        <td><a href="{{ route('record.show', $record) }}">{{ $record->name }}</a></td>
                         <td>{{ $record->updated_at }}</td>
                         </tr>
                     @endforeach

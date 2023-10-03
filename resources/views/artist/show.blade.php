@@ -4,12 +4,13 @@
 <div class="container">
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
-            <h1 class="h4 my-2">{{ $artist->name }}</h1>
-            @if($artist->images()->count() > 0))
+            <h1 class="h4 my-2">Артист: {{ $artist->name }}</h1>
+            @if($artist->images()->count() > 0)
                 <img src="{{ asset('storage/'.$artist->latestImage->link) }}" alt="">
             @endif
             <hr class="py-1">
         @if($records->count() > 0)
+            <h2 class="h4">Записи: </h2>
             <table class="table">
                 <thead>
                 <tr>
@@ -21,14 +22,16 @@
                 <tbody>
                 @forelse ($records as $record)
                     <tr>
+                        <td>{{ $record->artist->name }}</td>
                         <td>
-                            @if($record->artist)
-                                {{ $record->artist->name }}
-                            @else
-                                {{ __('artist.deleted') }}
-                            @endif
+                        @if($record->artist)
+                            <a href="{{ route('record.show', $record) }}">
+                                {{ $record->name }}
+                            </a>
+                        @else
+                            {{ __('artist.deleted') }}
+                        @endif
                         </td>
-                        <td>{{ $record->name }}</td>
                         <td>{{ $record->updated_at }}</td>
                     </tr>
                     @endforeach

@@ -26,6 +26,10 @@ class Image extends Model
     {
         return $this->morphedByMany(Record::class, 'parent');
     }
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'parent');
+    }
 
     public function save(array $options = [])
     {
