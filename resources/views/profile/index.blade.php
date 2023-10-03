@@ -9,7 +9,7 @@
             Имя: {{ $profile->name }}
             <hr class="py-1">
         @if($profile->images()->count() > 0)
-            <img src="{{ asset('storage/'.$profile->latestImage->link) }}" alt="">
+            <img src="{{ asset('storage/'.$profile->latestImage->link) }}" class="img-thumbnail">
         @endif
             <h2><a href="{{ route('artist.index') }}">{{ __('artist.menu_name') }}</a>: {{ $artists->count() }}</h2>
         @if($artists->count() > 0)

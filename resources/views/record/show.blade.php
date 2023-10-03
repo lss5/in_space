@@ -14,8 +14,8 @@
                 </p>
                 <p>Жанр: Неизвестен</p>
                 <p>Год: {{ $record->created_at->format('Y') }}</p>
-                @if($record->images()->count() > 0))
-                    <img src="{{ asset('storage/'.$record->latestImage->link) }}" alt="">
+                @if($record->images()->count() > 0)
+                    <img src="{{ asset('storage/'.$record->latestImage->link) }}" class="img-thumbnail" alt="">
                 @endif
                 <hr class="py-1">
                 <a href="{{ route('record.edit', $record) }}" class="btn btn-warning mx-1">{{ __('button.edit') }}</a>

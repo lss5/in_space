@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">Артист: {{ $artist->name }}</h1>
             @if($artist->images()->count() > 0)
-                <img src="{{ asset('storage/'.$artist->latestImage->link) }}" alt="">
+                <img src="{{ asset('storage/'.$artist->latestImage->link) }}" alt="" class="img-thumbnail">
             @endif
             <hr class="py-1">
         @if($records->count() > 0)
