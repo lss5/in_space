@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\PlaylistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,7 @@ use App\Http\Controllers\ArtistController;
 Auth::routes();
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+
 // Artist
 Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
@@ -37,11 +38,24 @@ Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
 Route::prefix('record')->name('record.')->group(function(){
     Route::get('/', [RecordController::class ,'index'])->name('index');
     Route::get('/create', [RecordController::class ,'create'])->name('create');
+    Route::post('/', [RecordController::class ,'store'])->name('store');
     Route::get('/{record}', [RecordController::class ,'show'])->name('show');
     Route::get('/{record}/edit', [RecordController::class ,'edit'])->name('edit');
-    Route::post('/', [RecordController::class ,'store'])->name('store');
+    Route::get('/{record}/to_playlist/{playlist}', [RecordController::class ,'to_playlist'])->name('to_playlist');
+    Route::get('/{record}/out_playlist/{playlist}', [RecordController::class ,'out_playlist'])->name('out_playlist');
     Route::put('/{record}', [RecordController::class ,'update'])->name('update');
     Route::delete('/{record}', [RecordController::class ,'destroy'])->name('destroy');
+});
+
+//Playlist
+Route::prefix('playlist')->name('playlist.')->group(function(){
+    Route::get('/', [PlaylistController::class ,'index'])->name('index');
+    Route::get('/create', [PlaylistController::class ,'create'])->name('create');
+    Route::get('/{playlist}', [PlaylistController::class ,'show'])->name('show');
+    Route::get('/{playlist}/edit', [PlaylistController::class ,'edit'])->name('edit');
+    Route::post('/', [PlaylistController::class ,'store'])->name('store');
+    Route::put('/{playlist}', [PlaylistController::class ,'update'])->name('update');
+    Route::delete('/{playlist}', [PlaylistController::class ,'destroy'])->name('destroy');
 });
 
 // Profile

@@ -26,8 +26,7 @@ class ArtistController extends Controller
 
         return view('artist.index', [
             'user' => $user,
-//            'artists' => $user->artists()->get(),
-            'artists' => Artist::with(['user', 'records'])->where('user_id', '=', $user->id)->get(),
+            'artists' => $user->artists,
         ]);
     }
 
@@ -74,6 +73,7 @@ class ArtistController extends Controller
         return view('artist.show', [
             'artist' => $artist,
             'records' => $artist->records()->get(),
+            'playlists' => Auth::user()->playlists,
         ]);
     }
 

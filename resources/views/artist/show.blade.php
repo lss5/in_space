@@ -17,24 +17,37 @@
                     <th scope="col">Артист</th>
                     <th scope="col">Название</th>
                     <th scope="col">Дата добавления</th>
+                    <th scope="col">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse ($records as $record)
-                    <tr>
-                        <td>{{ $record->artist->name }}</td>
-                        <td>
-                        @if($record->artist)
-                            <a href="{{ route('record.show', $record) }}">
-                                {{ $record->name }}
-                            </a>
-                        @else
-                            {{ __('artist.deleted') }}
-                        @endif
-                        </td>
-                        <td>{{ $record->updated_at }}</td>
-                    </tr>
-                    @endforeach
+            @foreach ($records as $record)
+                <tr>
+                    <td>{{ $record->artist->name }}</td>
+                    <td>
+                    @if($record->artist)
+                        <a href="{{ route('record.show', $record) }}">{{ $record->name }}</a>
+                    @else
+                        {{ __('artist.deleted') }}
+                    @endif
+                    </td>
+                    <td>{{ $record->updated_at->format('Y') }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Добавить в плейлист
+                            </button>
+                            <ul class="dropdown-menu">
+                                @forelse($playlists as $playlist)
+                                    <li><a class="dropdown-item" href="{{ route('record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
+                                @empty
+                                    <li>Плейлисты не созданы</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
                 </tbody>
             </table>
         @else

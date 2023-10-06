@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
 use App\Models\Artist;
+use App\Models\Playlist;
 use App\Models\Record;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
@@ -29,6 +31,7 @@ class RecordController extends Controller
         return view('record.index', [
             'user' => $user,
             'records' => $user->records()->get(),
+            'playlists' => $user->playlists,
         ]);
     }
 
@@ -75,8 +78,11 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
+        $user = Auth::user();
+
         return view('record.show', [
             'record' => $record,
+            'playlists' => $user->playlists,
         ]);
     }
 
@@ -127,11 +133,37 @@ class RecordController extends Controller
      */
     public function destroy(Record $record)
     {
+        // Delete all images
         foreach ($record->images as $image) {
             $image->delete();
         }
+        // Delete records from playlists
+        $record->playlists()->detach();
+
         $record->delete();
 
         return redirect()->route('artist.show', $record->artist);
+    }
+
+    public function to_playlist(Request $request, Record $record, Playlist $playlist)
+    {
+        // TODO: add validates
+        if ($request->user()->can('update', $playlist)){
+            $playlist->records()->syncWithoutDetaching($record);
+
+            return redirect()->route('playlist.show', $playlist);
+        }
+        return abort(404);
+    }
+
+    public function out_playlist(Request $request, Record $record, Playlist $playlist)
+    {
+        // TODO: add validates
+        if ($request->user()->can('update', $playlist)){
+            $playlist->records()->detach($record);
+
+            return redirect()->route('playlist.show', $playlist);
+        }
+        return abort(404);
     }
 }

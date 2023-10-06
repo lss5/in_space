@@ -39,5 +39,10 @@ class Record extends Model
         return $this->morphOne(Image::class, 'parent')->latestOfMany();
     }
 
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class);
+    }
+
 }
 

@@ -59,6 +59,10 @@ class User extends Authenticatable
     {
         return $this->morphOne(Image::class, 'parent')->latestOfMany();
     }
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
 
     public function isAdministrator()
     {
