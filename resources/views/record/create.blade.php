@@ -72,6 +72,21 @@
                     </div>
                 </div>
 
+                <div class="row my-2">
+                    <div class="col-sm-12 col-lg-3">
+                        <label class="mb-0">Запись</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('audio')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <input type="file" name="audio" accept=".ogg,.flac,.mp3" class="form-control @error('audio') is-invalid @enderror" id="audio">
+                        <small class="form-text text-muted">Аудиозапись в формате MP3</small>
+                    </div>
+                </div>
+
                 <hr class="pb-1">
 
                 <div class="row">

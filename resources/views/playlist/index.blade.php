@@ -5,10 +5,11 @@
 <div class="container">
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
-            <h2>Мои плейлисты</h2>
+            <h1>Плейлисты</h1>
             <hr class="py-1">
 
             <div class="d-flex justify-content-between my-2">
+                <h2 class="m-0">Мои плейлисты</h2>
                 <a href="{{ route('playlist.create') }}" type="button" class="btn btn-success">{{ __('button.create') }}</a>
             </div>
 

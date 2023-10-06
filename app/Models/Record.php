@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Record extends Model
 {
@@ -42,6 +43,14 @@ class Record extends Model
     public function playlists()
     {
         return $this->belongsToMany(Playlist::class);
+    }
+
+    public function delete()
+    {
+        if (Storage::disk('public')->exists($this->link)) {
+            Storage::disk('public')->delete($this->link);
+        }
+        return parent::delete();
     }
 
 }

@@ -3,7 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row bg-white py-5">
-            <div class="col-12 col-lg-8 mx-auto">
+            <div class="col-12 col-lg-8 mx-auto d-flex flex-column">
+                @if($record->images()->count() > 0)
+                    <img src="{{ asset('storage/'.$record->latestImage->link) }}" class="img-thumbnail" alt="" style="width: 200px">
+                @endif
                 <h1 class="h4 my-2">Запись: {{ $record->name }}</h1>
                 <p>Артист:
                     @if($record->artist)
@@ -12,11 +15,14 @@
                         {{ __('artist.deleted') }}
                     @endif
                 </p>
+                <p>Описание: {{ $record->description }}</p>
                 <p>Жанр: Неизвестен</p>
                 <p>Год: {{ $record->created_at->format('Y') }}</p>
-                @if($record->images()->count() > 0)
-                    <img src="{{ asset('storage/'.$record->latestImage->link) }}" class="img-thumbnail" alt="">
-                @endif
+                <audio controls class="w-100">
+                    <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
+                    Тег audio не поддерживается вашим браузером.
+                    <a href="#">Скачайте музыку</a>.
+                </audio>
                 <hr class="py-1">
                 <div class="d-flex flex-row">
                     <a href="{{ route('record.edit', $record) }}" class="btn btn-warning mx-1">{{ __('button.edit') }}</a>

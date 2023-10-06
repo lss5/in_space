@@ -20,19 +20,19 @@
                 <tbody>
                 @forelse ($playlist->records as $record)
                     <tr>
-                        <td>{{ $record->artist->name }}</td>
                         <td>
-                        @if($record->artist)
-                            <a href="{{ route('record.show', $record) }}">
-                                {{ $record->name }}
-                            </a>
-                        @else
-                            {{ __('artist.deleted') }}
-                        @endif
+                            @if($record->artist)
+                                {{ $record->artist->name }}
+                            @else
+                                {{ __('artist.deleted') }}
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('record.show', $record) }}">{{ $record->name }}</a>
                         </td>
                         <td>{{ $record->updated_at->format('d.m.Y') }}</td>
                         <td>
-                            <a href="{{ route('record.out_playlist', [$record, $playlist]) }}" class="btn btn-danger">Удалить</a>
+                            <a href="{{ route('record.out_playlist', [$record, $playlist]) }}" class="btn btn-sm btn-danger">Удалить</a>
                         </td>
                     </tr>
                     @endforeach

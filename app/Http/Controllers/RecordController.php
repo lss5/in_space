@@ -43,7 +43,7 @@ class RecordController extends Controller
     public function create()
     {
         return view('record.create', [
-            'artists' => Artist::where('user_id', '=', Auth::user()->id)->get(),
+            'artists' => Auth::user()->artists,
         ]);
     }
 
@@ -57,8 +57,10 @@ class RecordController extends Controller
     {
         $record = new Record();
         $record->name = $request->name;
-        $record->user()->associate(Auth::user()->id);
+        $record->description = $request->description;
+        $record->user()->associate(Auth::user());
         $record->artist()->associate($request->artist);
+        $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
         $record->save();
 
         if ($request->hasFile('image')) {
@@ -67,7 +69,7 @@ class RecordController extends Controller
             ]);
         }
 
-        return redirect()->route('artist.show', $request->artist);
+        return redirect()->route('record.show', $record);
     }
 
     /**
@@ -142,7 +144,7 @@ class RecordController extends Controller
 
         $record->delete();
 
-        return redirect()->route('artist.show', $record->artist);
+        return redirect()->route('record.index');
     }
 
     public function to_playlist(Request $request, Record $record, Playlist $playlist)

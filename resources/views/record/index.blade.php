@@ -7,8 +7,11 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
             <hr class="py-1">
+            <div class="d-flex justify-content-between my-2">
+                <h2 class="m-0">{{ __('record.menu_name') }}</h2>
+                <a href="{{ route('record.create') }}" type="button" class="btn btn-success">{{ __('button.add_record') }}</a>
+            </div>
 
-            <h2>{{ __('record.menu_name') }}</h2>
             @if($records->count() > 0)
                 <table class="table">
                     <thead>

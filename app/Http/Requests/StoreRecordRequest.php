@@ -27,8 +27,9 @@ class StoreRecordRequest extends FormRequest
         return [
             'artist' => ['required', 'integer', 'exists:artists,id'],
             'name' => 'required|string|min:4|max:255',
-            'description' => 'nullable|string|max:4096',
+            'description' => 'nullable|string|max:61440',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096|dimensions:min_width=400,min_height=400',
+            'audio' => 'required|file|mimes:mp3,ogg,flac|max:9216',
         ];
     }
 }
