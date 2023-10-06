@@ -20,12 +20,9 @@
                                         {{ $message }}
                                     </small>
                                 @enderror
-
                                 <div class="input-group">
                                     <input type="file" class="form-control @error('image') is-invalid @enderror" id="image">
-    {{--                                <label class="input-group-text" for="image">Upload</label>--}}
                                 </div>
-
                                 <small class="form-text text-muted">{{ __('artist.form_image_prompt') }}</small>
                             </div>
                         </div>
