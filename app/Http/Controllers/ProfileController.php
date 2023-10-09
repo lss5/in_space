@@ -32,10 +32,22 @@ class ProfileController extends Controller
             'artists' => $profile
                 ->artists()
                 ->orderBy('created_at', 'desc')
+                ->limit(10)
                 ->get(),
             'records' => $profile
                 ->records()
                 ->orderBy('created_at', 'desc')
+                ->limit(10)
+                ->get(),
+            'playlists' => $profile
+                ->playlists()
+                ->orderBy('created_at', 'desc')
+                ->limit(10)
+                ->get(),
+            'liked' => $profile
+                ->likes()
+                ->orderBy('created_at', 'desc')
+                ->limit(10)
                 ->get(),
         ]);
     }

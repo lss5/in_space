@@ -85,6 +85,7 @@ class RecordController extends Controller
         return view('record.show', [
             'record' => $record,
             'playlists' => $user->playlists,
+            'like' => $record->likes()->where('user_id', $user->id)->first(),
         ]);
     }
 

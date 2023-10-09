@@ -44,6 +44,10 @@ class Record extends Model
     {
         return $this->belongsToMany(Playlist::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 
     public function delete()
     {

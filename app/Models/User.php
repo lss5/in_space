@@ -63,6 +63,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Playlist::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 
     public function isAdministrator()
     {

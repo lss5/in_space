@@ -20,7 +20,9 @@
     @else
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                @if(Auth::user()->images()->count() > 0)
+                    <img src="{{ asset('storage/'.Auth::user()->latestImage->link) }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                @endif
                 {{ Auth::user()->name }}
             </a>
 
@@ -29,6 +31,7 @@
                 <a href="{{ route('artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                 <a href="{{ route('record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                 <a href="{{ route('playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>
+                <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
 
                 <a class="dropdown-item" href="{{ route('logout') }}"

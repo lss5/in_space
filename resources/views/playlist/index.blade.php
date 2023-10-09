@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
-            <h1>Плейлисты</h1>
+            <h1>{{ Auth::user()->name }}</h1>
             <hr class="py-1">
 
             <div class="d-flex justify-content-between my-2">

@@ -6,6 +6,7 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,6 @@ use App\Http\Controllers\PlaylistController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Auth::routes();
 
@@ -63,6 +63,12 @@ Route::prefix('profile')->name('profile.')->group(function() {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::get('/edit', [ProfileController::class ,'edit'])->name('edit');
     Route::put('/{user}', [ProfileController::class ,'update'])->name('update');
+});
+
+//Like
+Route::prefix('like')->name('like.')->group(function(){
+    Route::get('/', [LikeController::class ,'index'])->name('index');
+    Route::get('/{record}', [LikeController::class ,'create'])->name('create');
 });
 
 
