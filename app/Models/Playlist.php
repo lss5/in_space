@@ -19,6 +19,7 @@ class Playlist extends Model
     }
     public function records()
     {
-        return $this->belongsToMany(Record::class);
+        return $this->belongsToMany(Record::class)
+            ->withTimestamps();
     }
 }

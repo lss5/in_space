@@ -69,6 +69,7 @@ Route::prefix('profile')->name('profile.')->group(function() {
 Route::prefix('like')->name('like.')->group(function(){
     Route::get('/', [LikeController::class ,'index'])->name('index');
     Route::get('/{record}', [LikeController::class ,'create'])->name('create');
+    Route::get('/{like}/unlike', [LikeController::class ,'destroy'])->name('delete');
 });
 
 

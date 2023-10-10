@@ -39,6 +39,11 @@ class Artist extends Model
         return $this->morphOne(Image::class, 'parent')->latestOfMany();
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'parent');
+    }
+
 
 
 }

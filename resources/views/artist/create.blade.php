@@ -21,7 +21,7 @@
                                     </small>
                                 @enderror
                                 <div class="input-group">
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image">
+                                    <input type="file" name="image" form-control @error('image') is-invalid @enderror" id="image">
                                 </div>
                                 <small class="form-text text-muted">{{ __('artist.form_image_prompt') }}</small>
                             </div>

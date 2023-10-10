@@ -30,7 +30,7 @@ class RecordController extends Controller
 
         return view('record.index', [
             'user' => $user,
-            'records' => $user->records()->get(),
+            'records' => $user->records()->orderBy('created_at', 'desc')->get(),
             'playlists' => $user->playlists,
         ]);
     }

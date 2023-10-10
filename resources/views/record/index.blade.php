@@ -6,59 +6,81 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ $user->name }}</h1>
-            <hr class="py-1">
             <div class="d-flex justify-content-between my-2">
                 <h2 class="m-0">{{ __('record.menu_name') }}</h2>
-                <a href="{{ route('record.create') }}" type="button" class="btn btn-success">{{ __('button.add_record') }}</a>
+                <a href="{{ route('record.create') }}" type="button" class="btn btn-secondary">{{ __('button.add_record') }}</a>
             </div>
+            <hr class="py-1">
 
-            @if($records->count() > 0)
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Артист</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Дата добавления</th>
-                        <th scope="col">Действия</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse ($records as $record)
-                        <tr>
-                        <th scope="row">{{ $record->id }}</th>
-                        <td>
-                            @if($record->artist)
-                                <a href="{{ route('artist.show', $record->artist) }}">{{ $record->artist->name }}</a>
-                            @else
-                                {{ __('artist.deleted') }}
-                            @endif
-                        </td>
-                        <td><a href="{{ route('record.show', $record) }}">{{ $record->name }}</a></td>
-                        <td>{{ $record->updated_at }}</td>
-                        <td>
+            <div class="list-group">
+            @forelse($records as $record)
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <a href="{{ route('record.show', $record) }}" class="text-decoration-none d-flex flex-row align-items-center w-25">
+                            <div class="me-3 d-flex flex-column align-items-center w-25">
+                                @if($record->images->count() > 0)
+                                    <img src="{{ asset('storage/'.$record->latestImage->link) }}" alt="" class="img img-fluid">
+                                @else
+                                    <img src="{{ asset('images/no_artist.jpeg') }}" alt="" class="img img-fluid">
+                                @endif
+                            </div>
+                            <div class="w-75">
+                                <h5 class="mb-1">{{ $record->name }}</h5>
+                                <p class="mb-1">
+                                    @isset($record->artist->name)
+                                        {{ $record->artist->name }}
+                                    @else
+                                        Неизвестен
+                                    @endisset
+                                </p>
+                                <small class="text-body-secondary">{{ $record->created_at->format('Y') }}</small>
+                            </div>
+                        </a>
+                        <div class="w-50 d-flex align-items-center">
+                            <audio controls class="w-100">
+                                <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
+                                Тег audio не поддерживается вашим браузером.
+                            </audio>
+                        </div>
+                        <div class="d-flex flex-column align-items-center justify-content-between">
+                            <small class="text-body-secondary">
+                                Добавлен:
+                                {{ $record->created_at->diffForHumans() }}
+                            </small>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Добавить в плейлист
+                                    Плейлист
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
+                                        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                                        <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
+                                        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
+                                        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
                                 </button>
                                 <ul class="dropdown-menu">
                                     @forelse($playlists as $playlist)
                                         <li><a class="dropdown-item" href="{{ route('record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
                                     @empty
-                                        <li>Плейлисты не созданы</li>
+                                        <li>Нет</li>
                                     @endforelse
                                 </ul>
                             </div>
-                        </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @else
-                <div class="col-12">
-                    <h5>Записи не созданы</h5>
+                        </div>
+                    </div>
                 </div>
-            @endif
+            @empty
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Нет добавленых записей</h5>
+                    <small class="text-body-secondary text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
+                            <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                            <path fill-rule="evenodd" d="M9 3v10H8V3h1z"/>
+                            <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
+                        </svg>
+                    </small>
+                </div>
+            @endforelse
+            </div>
         </div>
     </div>
 </div>

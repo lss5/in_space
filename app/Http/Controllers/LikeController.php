@@ -31,64 +31,12 @@ class LikeController extends Controller
     public function create(Record $record)
     {
         $user = Auth::user();
-        $like = $record->likes()->where('user_id', $user->id)->first();
-//        dd($like);
 
-        if ($like) {
-            $like->delete();
-        } else {
-            $user->likes()->create([
-                'record_id' => $record->id,
-            ]);
-        }
-
+        $record->likes()->firstOrCreate([
+            'user_id' => $user->id,
+        ]);
 
         return redirect()->route('record.show', $record);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreLikeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreLikeRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Like $like)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Like $like)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLikeRequest  $request
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateLikeRequest $request, Like $like)
-    {
-        //
     }
 
     /**
@@ -99,6 +47,8 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
-        //
+        $like->delete();
+
+        return redirect()->route('record.show', $like->liked);
     }
 }

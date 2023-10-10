@@ -17,7 +17,8 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('user_id');
-            $table->integer('record_id');
+            $table->integer('parent_id');
+            $table->string('parent_type');
         });
     }
 

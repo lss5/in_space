@@ -61,11 +61,11 @@ class User extends Authenticatable
     }
     public function playlists()
     {
-        return $this->hasMany(Playlist::class);
+        return $this->hasMany(Playlist::class)->orderBy('created_at', 'desc');
     }
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class)->orderBy('created_at', 'desc');
     }
 
     public function isAdministrator()
