@@ -8,6 +8,24 @@
             <hr class="py-1">
             <form method="POST" action="{{ route('artist.store') }}" enctype="multipart/form-data">
                 @csrf
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        <label for="artist">Жанр</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('genre')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <select  name="genre" id="genre" class="form-select @error('genre') is-invalid @enderror" aria-describedby="artistHelp">
+                            @foreach ($genres as $genre)
+                                <option value="{{ $genre->id }}" @if(old('genre') == $genre->id) selected @endif>{{ $genre->name }}</option>
+                            @endforeach
+                        </select>
+                        <small class="form-text text-muted">Выберите Жанр из списка доступных</small>
+                    </div>
+                </div>
                 <div class="row my-2">
                     <div class="col-sm-12 col-lg-3">
                         <label class="mb-0">{{ __('artist.form_image') }}</label>
@@ -21,7 +39,7 @@
                                     </small>
                                 @enderror
                                 <div class="input-group">
-                                    <input type="file" name="image" form-control @error('image') is-invalid @enderror" id="image">
+                                    <input type="file" name="image" id="image" class="form-control" @error('image') is-invalid @enderror">
                                 </div>
                                 <small class="form-text text-muted">{{ __('artist.form_image_prompt') }}</small>
                             </div>

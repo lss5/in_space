@@ -16,7 +16,13 @@
                     @endif
                 </p>
                 <p>Описание: {{ $record->description }}</p>
-                <p>Жанр: Неизвестен</p>
+                <p>Жанр:
+                @forelse($record->genres as $genre)
+                    {{ $genre->name }}
+                @empty
+                    Неизвестен
+                @endforelse
+                </p>
                 <p>Год: {{ $record->created_at->format('Y') }}</p>
                 <audio controls class="w-100">
                     <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">

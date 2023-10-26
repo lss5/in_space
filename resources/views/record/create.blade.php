@@ -10,6 +10,24 @@
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
+                        <label for="artist">Жанр</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('genre')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <select  name="genre" id="genre" class="form-select @error('genre') is-invalid @enderror" aria-describedby="artistHelp">
+                            @foreach ($genres as $genre)
+                                <option value="{{ $genre->id }}" @if(old('genre') == $genre->id) selected @endif>{{ $genre->name }}</option>
+                            @endforeach
+                        </select>
+                        <small class="form-text text-muted">Выберите Жанр из списка доступных</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
                         <label for="artist">{{ __('record.form_create_artist') }}</label>
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
@@ -20,7 +38,7 @@
                         @enderror
                         <select class="form-select @error('artist') is-invalid @enderror" aria-describedby="artistHelp" name="artist" id="artist">
                             @foreach ($artists as $artist)
-                                <option value="{{ $artist->id }}" @if(old('country') == $artist->id) selected @endif>{{ $artist->name }}</option>
+                                <option value="{{ $artist->id }}" @if(old('artist') == $artist->id) selected @endif>{{ $artist->name }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-muted">Выберите Артиста из списка доступных</small>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RecordController;
@@ -70,6 +71,16 @@ Route::prefix('like')->name('like.')->group(function(){
     Route::get('/', [LikeController::class ,'index'])->name('index');
     Route::get('/{record}', [LikeController::class ,'create'])->name('create');
     Route::get('/{like}/unlike', [LikeController::class ,'destroy'])->name('delete');
+});
+
+//Genre
+Route::prefix('genre')->name('genre.')->group(function(){
+    Route::get('/', [GenreController::class ,'index'])->name('index');
+    Route::get('/create', [GenreController::class ,'create'])->name('create');
+    Route::get('/{genre}/edit', [GenreController::class ,'edit'])->name('edit');
+    Route::post('/', [GenreController::class ,'store'])->name('store');
+    Route::put('/{genre}', [GenreController::class ,'update'])->name('update');
+    Route::delete('/{genre}', [GenreController::class ,'destroy'])->name('destroy');
 });
 
 

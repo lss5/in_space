@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
 use App\Models\Artist;
+use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Record;
 use Illuminate\Http\Request;
@@ -44,6 +45,7 @@ class RecordController extends Controller
     {
         return view('record.create', [
             'artists' => Auth::user()->artists,
+            'genres' => Genre::all(),
         ]);
     }
 
@@ -62,6 +64,7 @@ class RecordController extends Controller
         $record->artist()->associate($request->artist);
         $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
         $record->save();
+        $record->genres()->attach($request->genre);
 
         if ($request->hasFile('image')) {
             $record->images()->create([
@@ -99,6 +102,7 @@ class RecordController extends Controller
     {
         return view('record.edit', [
             'record' => $record,
+            'genres' => Genre::all(),
         ]);
     }
 
@@ -123,7 +127,10 @@ class RecordController extends Controller
         }
 
         $record->name = $request->name;
+        $record->description = $request->description;
         $record->save();
+        $record->genres()->detach();
+        $record->genres()->attach($request->genre);
 
         return redirect()->route('record.show', $record);
     }

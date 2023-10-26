@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Genre extends Model
+{
+    use HasFactory;
+
+    public function records()
+    {
+        return $this->morphedByMany(Record::class, 'genreable');
+    }
+
+    public function artists()
+    {
+        return $this->morphedByMany(Artist::class, 'genreable');
+    }
+}

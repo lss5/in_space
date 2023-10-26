@@ -9,6 +9,28 @@
             <form method="POST" action="{{ route('artist.update', $artist) }}" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        <label for="artist">Жанр</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('genre')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <select  name="genre" id="genre" class="form-select @error('genre') is-invalid @enderror" aria-describedby="artistHelp">
+                            @foreach ($genres as $genre)
+                                @if($artist->genres()->first())
+                                    <option value="{{ $genre->id }}" @if(old('genre') == $genre->id || $artist->genres()->first()->id == $genre->id) selected @endif>{{ $genre->name }}</option>
+                                @else
+                                    <option value="{{ $genre->id }}" @if(old('genre') == $genre->id) selected @endif>{{ $genre->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <small class="form-text text-muted">Выберите Жанр из списка доступных</small>
+                    </div>
+                </div>
                 <div class="row my-2">
                     <div class="col-sm-12 col-lg-3">
                         <label class="mb-0">{{ __('artist.form_image') }}</label>

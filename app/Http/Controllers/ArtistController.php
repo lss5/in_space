@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArtistRequest;
 use App\Http\Requests\UpdateArtistRequest;
 use App\Models\Artist;
+use App\Models\Genre;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,9 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('artist.create');
+        return view('artist.create', [
+            'genres' => Genre::all(),
+        ]);
     }
 
     /**
@@ -52,6 +55,8 @@ class ArtistController extends Controller
         $artist->name = $request->name;
         $artist->user_id = Auth::user()->id;
         $artist->save();
+
+        $artist->genres()->attach($request->genre);
 
         if ($request->hasFile('image')) {
             $artist->images()->create([
@@ -87,6 +92,7 @@ class ArtistController extends Controller
     {
         return view('artist.edit', [
             'artist' => $artist,
+            'genres' => Genre::all(),
         ]);
     }
 
@@ -111,7 +117,11 @@ class ArtistController extends Controller
         }
 
         $artist->name = $request->name;
+//        $artist->description = $request->description;
         $artist->save();
+
+        $artist->genres()->detach();
+        $artist->genres()->attach($request->genre);
 
         return redirect()->route('artist.show', $artist);
     }

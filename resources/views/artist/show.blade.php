@@ -14,6 +14,12 @@
                 </div>
                 <div class="d-flex flex-column justify-content-between">
                     <h1 class="h4">Артист: {{ $artist->name }}</h1>
+                    Жанр:
+                    @forelse($artist->genres as $gerne)
+                        {{ $gerne->name }}
+                    @empty
+                        Неизвестен
+                    @endforelse
                     <span>{{ $artist->description }}</span>
                     <div class="d-flex flex-row">
                         <a href="{{ route('artist.edit', $artist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
