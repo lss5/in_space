@@ -23,6 +23,8 @@
     <div id="app">
         @include('partial.navbar')
 
+        @include('partial.alert')
+
         <main class="m-0">
             @yield('content')
         </main>

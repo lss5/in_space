@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLikeRequest;
-use App\Http\Requests\UpdateLikeRequest;
 use App\Models\Like;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;

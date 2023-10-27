@@ -19,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'description',
         'email',
         'password',
     ];
@@ -41,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     public function records()
     {
@@ -68,8 +75,22 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->orderBy('created_at', 'desc');
     }
 
-    public function isAdministrator()
+    public function hasAnyRoles($roles)
     {
+        if ($this->roles()->whereIn('uniq_name', $roles)->first()) {
+            return true;
+        }
+
         return false;
     }
+
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('uniq_name', $role)->first()) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

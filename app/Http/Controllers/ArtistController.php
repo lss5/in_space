@@ -54,6 +54,7 @@ class ArtistController extends Controller
     {
         $artist = new Artist();
         $artist->name = $request->name;
+        $artist->description = $request->description;
         $artist->user_id = Auth::user()->id;
         $artist->save();
 
@@ -118,7 +119,7 @@ class ArtistController extends Controller
         }
 
         $artist->name = $request->name;
-//        $artist->description = $request->description;
+       $artist->description = $request->description;
         $artist->save();
 
         $artist->genres()->detach();

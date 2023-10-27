@@ -33,7 +33,7 @@ class UpdatePlaylistRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:4|max:255',
+            'name' => 'required|string|min:3|max:255',
             'description' => 'nullable|string|max:4096',
 //            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096|dimensions:min_width=400,min_height=400',
         ];

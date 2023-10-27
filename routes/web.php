@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,13 @@ Route::prefix('genre')->name('genre.')->group(function(){
     Route::post('/', [GenreController::class ,'store'])->name('store');
     Route::put('/{genre}', [GenreController::class ,'update'])->name('update');
     // Route::delete('/{genre}', [GenreController::class ,'destroy'])->name('destroy');
+});
+
+// Users Administration
+Route::prefix('admin/users')->name('user.')->middleware('auth','can:admin')->group(function(){
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('update');
 });
 
 

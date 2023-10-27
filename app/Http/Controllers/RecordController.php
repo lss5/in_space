@@ -44,10 +44,15 @@ class RecordController extends Controller
      */
     public function create()
     {
-        return view('record.create', [
-            'artists' => Auth::user()->artists,
-            'genres' => Genre::all(),
-        ]);
+        $artists = Auth::user()->artists;
+        if ($artists->count() > 0) {
+            return view('record.create', [
+                'artists' => $artists,
+                'genres' => Genre::all(),
+            ]);
+        } else {
+            return redirect()->route('artist.index')->with('warning', 'Для создания записи необходимо добавить Артиста');
+        }
     }
 
     /**

@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">{{ __('profile.form_email') }}</label>
-                    <input class="form-control" type="text" value="{{ $profile->email }}" aria-label="{{ __('profile.form_email_prompt') }}" disabled readonly>
+                    <input class="form-control" type="text" id="email" value="{{ $profile->email }}" aria-label="{{ __('profile.form_email_prompt') }}" disabled readonly>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('profile.form_name') }}</label>
@@ -28,8 +28,15 @@
                 @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="last_name" class="form-label">Фамилия</label>
+                    <input type="last_name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" id="last_name" value="{{ $profile->last_name }}">
+                @error('last_name')
+                    <div class="form-text">{{ $message }}</div>
+                @enderror
+                </div>
+                <div class="mb-3">
                     <label for="description" class="form-label">{{ __('profile.form_description') }}</label>
-                    <textarea class="form-control" id="description" rows="3"></textarea>
+                    <textarea class="form-control" name="description" rows="3">{{ $profile->description }}</textarea>
                     <div id="descriptionHelpBlock" class="form-text">{{ __('profile.form_description_prompt') }}</div>
                 </div>
                 <!-- Buttons -->

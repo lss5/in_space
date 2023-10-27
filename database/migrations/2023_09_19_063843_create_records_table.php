@@ -23,6 +23,9 @@ class CreateRecordsTable extends Migration
             $table->foreignId('user_id')->constrained();
 
             $table->string('name');
+            $table->string('link');
+            $table->text('description')->nullable();
+            $table->string('status', 36)->default('created');
         });
     }
 

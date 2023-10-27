@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Record;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class RecordPolicy
 {
@@ -19,8 +20,8 @@ class RecordPolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->isAdministrator()) {
-            return true;
+        if ($user->hasRole('admin')) {
+            // return true;
         }
     }
 

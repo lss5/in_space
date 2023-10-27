@@ -32,9 +32,14 @@
                 <a href="{{ route('record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                 <a href="{{ route('playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>
                 <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
-                <a href="{{ route('genre.index') }}" class="dropdown-item">Жанры</a>
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
-
+                @can('admin')
+                    <hr class="dropdown-divider">
+                    <a href="{{ route('genre.index') }}" class="dropdown-item">Жанры</a>
+                    <a href="{{ route('user.index') }}" class="dropdown-item">Пользователи</a>
+                @endcan
+                    
+                <hr class="dropdown-divider">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

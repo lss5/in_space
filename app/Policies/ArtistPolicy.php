@@ -19,7 +19,7 @@ class ArtistPolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->isAdministrator()) {
+        if ($user->hasRole('admin')) {
             return true;
         }
     }

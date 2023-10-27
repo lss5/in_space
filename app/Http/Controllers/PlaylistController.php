@@ -48,6 +48,7 @@ class PlaylistController extends Controller
         $user = Auth::user();
         $user->playlists()->create([
             'name' => $request->name,
+            'description' => $request->description,
         ]);
 
         return redirect()->route('playlist.index');
@@ -89,6 +90,7 @@ class PlaylistController extends Controller
     public function update(UpdatePlaylistRequest $request, Playlist $playlist)
     {
         $playlist->name = $request->name;
+        $playlist->description = $request->description;
         $playlist->save();
 
         return redirect()->route('playlist.show', $playlist);

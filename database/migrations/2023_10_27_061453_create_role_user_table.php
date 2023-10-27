@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArtistsTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateArtistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('artists', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->timestamp('active_at')->nullable();
+            $table->foreignId('role_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('status', 36)->default('created');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +28,6 @@ class CreateArtistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('role_user');
     }
 }

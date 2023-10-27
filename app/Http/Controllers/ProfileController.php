@@ -108,6 +108,8 @@ class ProfileController extends Controller
         }
 
         $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->description = $request->description;
         $user->save();
 
         return redirect()->route('profile.index');
