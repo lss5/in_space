@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // Artist
-Route::prefix('artist')->name('artist.')->middleware('auth')->group(function(){
+Route::prefix('artist')->name('artist.')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
     Route::get('/create', [ArtistController::class ,'create'])->name('create');
     Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
@@ -80,7 +80,7 @@ Route::prefix('genre')->name('genre.')->group(function(){
     Route::get('/{genre}/edit', [GenreController::class ,'edit'])->name('edit');
     Route::post('/', [GenreController::class ,'store'])->name('store');
     Route::put('/{genre}', [GenreController::class ,'update'])->name('update');
-    Route::delete('/{genre}', [GenreController::class ,'destroy'])->name('destroy');
+    // Route::delete('/{genre}', [GenreController::class ,'destroy'])->name('destroy');
 });
 
 

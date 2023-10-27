@@ -15,6 +15,7 @@ class RecordController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->authorizeResource(Record::class, 'record');
 //        $this->middleware('log')->only('index');
 //        $this->middleware('auth')->except('index');

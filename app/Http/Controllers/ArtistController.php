@@ -13,6 +13,7 @@ class ArtistController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->authorizeResource(Artist::class, 'artist');
     }
 
