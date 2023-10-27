@@ -42,9 +42,9 @@ class ArtistPolicy
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Artist $artist)
+    public function view(?User $user, Artist $artist)
     {
-        return $user->id === $artist->user_id;
+        return true;
     }
 
     /**

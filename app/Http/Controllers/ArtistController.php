@@ -13,7 +13,7 @@ class ArtistController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
         $this->authorizeResource(Artist::class, 'artist');
     }
 
@@ -77,10 +77,16 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
+        $playlists = [];
+
+        if (Auth::user()) {
+            $playlists = Auth::user()->playlists;
+        }
+
         return view('artist.show', [
             'artist' => $artist,
             'records' => $artist->records,
-            'playlists' => Auth::user()->playlists,
+            'playlists' => $playlists,
         ]);
     }
 

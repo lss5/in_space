@@ -22,9 +22,11 @@
                     @endforelse
                     <span>{{ $artist->description }}</span>
                     <div class="d-flex flex-row">
+                    @can('update', $artist)
                         <a href="{{ route('artist.edit', $artist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
                         <a href="{{ route('record.create') }}" class="btn btn-secondary mx-1">{{ __('button.add_record') }}</a>
                         <a href="{{ route('artist.index') }}" class="btn btn-outline-secondary mx-1">Все Артисты</a>
+                    @endcan
                     </div>
                 </div>
             </div>

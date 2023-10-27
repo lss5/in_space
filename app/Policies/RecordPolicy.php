@@ -21,7 +21,7 @@ class RecordPolicy
     public function before(User $user, $ability)
     {
         if ($user->hasRole('admin')) {
-            // return true;
+            return true;
         }
     }
 
@@ -43,7 +43,7 @@ class RecordPolicy
      * @param  \App\Models\Record  $record
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Record $record)
+    public function view(?User $user, Record $record)
     {
         return true;
     }

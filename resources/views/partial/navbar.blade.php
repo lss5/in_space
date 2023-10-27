@@ -4,6 +4,7 @@
                     <li class="nav-item"><a href="{{ route('index') }}" class="nav-link link-body-emphasis px-2 active" aria-current="page">{{ __('menu.home') }}</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.music') }}</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.video') }}</a></li>
+<li class="nav-item"><a href="{{ route('genre.index') }}" class="nav-link link-body-emphasis px-2">Жанры</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.faq') }}</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.about') }}</a></li>
 </ul>

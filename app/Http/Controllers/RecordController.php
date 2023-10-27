@@ -15,10 +15,8 @@ class RecordController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
         $this->authorizeResource(Record::class, 'record');
-//        $this->middleware('log')->only('index');
-//        $this->middleware('auth')->except('index');
     }
 
     /**
@@ -90,16 +88,23 @@ class RecordController extends Controller
     public function show(Record $record)
     {
         $user = Auth::user();
+        $playlists = [];
+        $like = null;
 
-        $play = $user->plays()->firstOrCreate([
-            'record_id' => $record->id,
-        ]);
-        $play->increment('count');
+        if ($user) {
+            $play = $user->plays()->firstOrCreate([
+                'record_id' => $record->id,
+            ]);
+            $play->increment('count');
+
+            $playlists = $user->playlists;
+            $like = $record->likes()->where('user_id', $user->id)->first();
+        }
 
         return view('record.show', [
             'record' => $record,
-            'playlists' => $user->playlists,
-            'like' => $record->likes()->where('user_id', $user->id)->first(),
+            'playlists' => $playlists,
+            'like' => $like,
             'plays' => $record->plays()->sum('count'),
         ]);
     }
