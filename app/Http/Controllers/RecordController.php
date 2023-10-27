@@ -91,10 +91,16 @@ class RecordController extends Controller
     {
         $user = Auth::user();
 
+        $play = $user->plays()->firstOrCreate([
+            'record_id' => $record->id,
+        ]);
+        $play->increment('count');
+
         return view('record.show', [
             'record' => $record,
             'playlists' => $user->playlists,
             'like' => $record->likes()->where('user_id', $user->id)->first(),
+            'plays' => $record->plays()->sum('count'),
         ]);
     }
 

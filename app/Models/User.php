@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->orderBy('created_at', 'desc');
     }
 
+    public function plays()
+    {
+        return $this->hasMany(Play::class);
+    }
+
     public function hasAnyRoles($roles)
     {
         if ($this->roles()->whereIn('uniq_name', $roles)->first()) {

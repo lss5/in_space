@@ -79,7 +79,7 @@ class ArtistController extends Controller
     {
         return view('artist.show', [
             'artist' => $artist,
-            'records' => $artist->records()->get(),
+            'records' => $artist->records,
             'playlists' => Auth::user()->playlists,
         ]);
     }
@@ -119,7 +119,7 @@ class ArtistController extends Controller
         }
 
         $artist->name = $request->name;
-       $artist->description = $request->description;
+        $artist->description = $request->description;
         $artist->save();
 
         $artist->genres()->detach();

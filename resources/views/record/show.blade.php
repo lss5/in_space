@@ -24,6 +24,7 @@
                 @endforelse
                 </p>
                 <p>Год: {{ $record->created_at->format('Y') }}</p>
+                <p>Воспроизведений: {{ $plays }}</p>
                 <audio controls class="w-100">
                     <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
                     Тег audio не поддерживается вашим браузером.
