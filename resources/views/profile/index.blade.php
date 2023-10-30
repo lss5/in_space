@@ -8,11 +8,11 @@
             <h1>{{ $profile->name }}</h1>
             <hr class="py-1">
 
-            <h2 class="my-2"><a href="{{ route('artist.index') }}" class="text-decoration-none">Мои артисты: {{ $artists->count() }}</a></h2>
+            <h2 class="my-2"><a href="{{ route('user.artist.index') }}" class="text-decoration-none">Мои артисты: {{ $artists->count() }}</a></h2>
         @if($artists->count() > 0)
             <div class="list-group">
                 @foreach($artists as $artist)
-                    <a href="{{ route('artist.show', $artist) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <a href="{{ route('user.artist.show', $artist) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         {{ $artist->name }}
                         <span class="badge bg-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">

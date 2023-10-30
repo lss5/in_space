@@ -42,14 +42,15 @@ class RecordController extends Controller
      */
     public function create()
     {
-        $artists = Auth::user()->artists;
+        $artists = Auth::user()->artists()->active()->get();
+
         if ($artists->count() > 0) {
             return view('record.create', [
                 'artists' => $artists,
                 'genres' => Genre::all(),
             ]);
         } else {
-            return redirect()->route('artist.index')->with('warning', 'Для создания записи необходимо добавить Артиста');
+            return redirect()->route('user.artist.index')->with('warning', 'Для создания записи необходимо добавить Артиста');
         }
     }
 
@@ -64,10 +65,11 @@ class RecordController extends Controller
         $record = new Record();
         $record->name = $request->name;
         $record->description = $request->description;
+        $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
         $record->user()->associate(Auth::user());
         $record->artist()->associate($request->artist);
-        $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
         $record->save();
+
         $record->genres()->attach($request->genre);
 
         if ($request->hasFile('image')) {

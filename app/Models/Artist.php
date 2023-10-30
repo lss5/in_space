@@ -3,18 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Artist extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    public static $statuses = [
+        'created',
+        'active',
+        'banned',
     ];
 
     public function records()
@@ -55,7 +59,28 @@ class Artist extends Model
         return $this->morphToMany(Genre::class, 'genreable');
     }
 
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', 'active');
+    }
 
+    public function delete()
+    {
+        // TODO: delete relation Likes and Unlikes
+
+        //Deleting relations Records
+        foreach ($this->images as $image) {
+            $image->delete();
+        }
+
+        // Deleting relation records
+        foreach ($this->records as $record) {
+            $record->delete();
+        }
+
+
+        return parent::delete();
+    }
 
 }
 

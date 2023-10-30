@@ -10,7 +10,7 @@
                 <h1 class="h4 my-2">Запись: {{ $record->name }}</h1>
                 <p>Артист:
                     @if($record->artist)
-                        <a href="{{ route('artist.show', $record->artist) }}">{{ $record->artist->name }}</a>
+                        <a href="{{ route('user.artist.show', $record->artist) }}">{{ $record->artist->name }}</a>
                     @else
                         {{ __('artist.deleted') }}
                     @endif

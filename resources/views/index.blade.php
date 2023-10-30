@@ -98,7 +98,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $artist->name }}</h5>
                     <p class="card-text">{{ $artist->description }}</p>
-                    <a href="{{ route('artist.show', $artist) }}" class="btn btn-secondary">Записей: {{ $artist->records()->count() }}</a>
+                    <a href="{{ route('user.artist.show', $artist) }}" class="btn btn-secondary">Записей: {{ $artist->records()->count() }}</a>
                 </div>
             </div>
         </div>

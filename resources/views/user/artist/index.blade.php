@@ -5,19 +5,25 @@
 <div class="container">
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
-            <h1>Все Артисты</h1>
-            
+            <h1>{{ $user->name }}</h1>
+            <div class="d-flex justify-content-between my-2">
+                <h2 class="m-0">{{ __('artist.menu_name') }}</h2>
+                <a href="{{ route('user.artist.create') }}" type="button" class="btn btn-secondary">{{ __('button.create') }}</a>
+            </div>
             <hr class="py-1">
 
             <div class="list-group">
             @forelse($artists as $artist)
-                <a href="{{ route('artist.show', $artist) }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('user.artist.show', $artist) }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $artist->name }}</h5>
                         <small class="text-body-secondary">Создан: {{ $artist->created_at->format('d.m.Y') }}</small>
                     </div>
                     <p class="mb-1">{{ $artist->description }}</p>
-                    <small class="text-body-secondary">Записей: {{ $artist->records()->count() }}</small>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small class="">Статус: {{ $artist->status }}</small>
+                        <small class="text-body-secondary">Записей: {{ $artist->records()->count() }}</small>
+                    </div>
                 </a>
             @empty
                 <a href="#" class="list-group-item list-group-item-action">

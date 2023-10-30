@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">{{ __('artist.form_create_title') }}</h1>
             <hr class="py-1">
-            <form method="POST" action="{{ route('artist.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.artist.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
@@ -82,7 +82,7 @@
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('button.add') }}</button>
-                        <a href="{{ route('artist.index') }}" class="btn btn-secondary mx-1" role="button" aria-pressed="false">{{ __('button.cancel') }}</a>
+                        <a href="{{ route('user.artist.index') }}" class="btn btn-secondary mx-1" role="button" aria-pressed="false">{{ __('button.cancel') }}</a>
                     </div>
                 </div>
             </form>

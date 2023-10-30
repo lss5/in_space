@@ -2,7 +2,7 @@
             <div class="container d-flex flex-wrap">
                 <ul class="nav me-auto">
                     <li class="nav-item"><a href="{{ route('index') }}" class="nav-link link-body-emphasis px-2 active" aria-current="page">{{ __('menu.home') }}</a></li>
-<li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.music') }}</a></li>
+<li class="nav-item"><a href="{{ route('artist.index') }}" class="nav-link link-body-emphasis px-2">{{ __('menu.artists') }}</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.video') }}</a></li>
 <li class="nav-item"><a href="{{ route('genre.index') }}" class="nav-link link-body-emphasis px-2">Жанры</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.faq') }}</a></li>
@@ -29,14 +29,15 @@
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <a href="{{ route('profile.index') }}" class="dropdown-item">{{ __('profile.menu_name') }}</a>
-                <a href="{{ route('artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
+                <a href="{{ route('user.artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                 <a href="{{ route('record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                 <a href="{{ route('playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>
                 <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
                 <a href="{{ route('unlike.index') }}" class="dropdown-item">Не понравились</a>
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
-                @can('admin')
+                @can('moder','admin')
                     <hr class="dropdown-divider">
+                    <a href="{{ route('admin.artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                     <a href="{{ route('genre.index') }}" class="dropdown-item">Жанры</a>
                     <a href="{{ route('user.index') }}" class="dropdown-item">Пользователи</a>
                 @endcan

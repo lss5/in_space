@@ -5,25 +5,41 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UnlikeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
+
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\User\ArtistController as UserArtistController;
+use App\Http\Controllers\Admin\ArtistController as AdminArtistController;
 
 Auth::routes();
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
-// Artist
+// Artist for registered user
+Route::prefix('user/artist')->name('user.artist.')->group(function(){
+    Route::get('/', [UserArtistController::class ,'index'])->name('index');
+    Route::get('/create', [UserArtistController::class ,'create'])->name('create');
+    Route::get('/{artist}', [UserArtistController::class ,'show'])->name('show');
+    Route::post('/', [UserArtistController::class ,'store'])->name('store');
+    Route::get('/{artist}/edit', [UserArtistController::class ,'edit'])->name('edit');
+    Route::put('/{artist}', [UserArtistController::class ,'update'])->name('update');
+    Route::delete('/{artist}', [UserArtistController::class ,'destroy'])->name('destroy');
+});
+// Artist for all users
 Route::prefix('artist')->name('artist.')->group(function(){
     Route::get('/', [ArtistController::class ,'index'])->name('index');
-    Route::get('/create', [ArtistController::class ,'create'])->name('create');
     Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
-    Route::post('/', [ArtistController::class ,'store'])->name('store');
-    Route::get('/{artist}/edit', [ArtistController::class ,'edit'])->name('edit');
-    Route::put('/{artist}', [ArtistController::class ,'update'])->name('update');
-    Route::delete('/{artist}', [ArtistController::class ,'destroy'])->name('destroy');
+});
+// Artist for administrator
+Route::prefix('admin/artist')->name('admin.artist.')->middleware('auth', 'can:moder,admin')->group(function(){
+    Route::get('/', [AdminArtistController::class ,'index'])->name('index');
+    // Route::get('/{artist}', [AdminArtistController::class ,'show'])->name('show');
+    Route::get('/{artist}/edit', [AdminArtistController::class ,'edit'])->name('edit');
+    Route::put('/{artist}', [AdminArtistController::class ,'update'])->name('update');
+    Route::delete('/{artist}', [AdminArtistController::class ,'destroy'])->name('destroy');
 });
 
 //Record

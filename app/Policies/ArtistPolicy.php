@@ -19,7 +19,7 @@ class ArtistPolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('moder')) {
             return true;
         }
     }
@@ -44,7 +44,7 @@ class ArtistPolicy
      */
     public function view(?User $user, Artist $artist)
     {
-        return true;
+        return optional($user)->id === $artist->user_id || $artist->status == 'active';
     }
 
     /**

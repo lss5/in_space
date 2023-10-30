@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 
 use App\Models\User;
 use App\Models\Role;
@@ -16,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index', [
+        return view('admin.user.index', [
             'users' => User::all(),
         ]);
     }
@@ -61,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', [
+        return view('admin.user.edit', [
             'user' => $user,
             'roles' => Role::all(),
         ]);
