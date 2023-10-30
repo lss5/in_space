@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
+use App\Models\Unlike;
 use App\Models\Record;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LikeController extends Controller
+class UnlikeController extends Controller
 {
     public function __construct()
     {
@@ -20,8 +21,8 @@ class LikeController extends Controller
      */
     public function index()
     {
-        return view('like.index', [
-            'likes' => Auth::user()->likes,
+        return view('unlike.index', [
+            'unlikes' => Auth::user()->unlikes,
         ]);
     }
 
@@ -34,7 +35,7 @@ class LikeController extends Controller
     {
         $user = Auth::user();
 
-        $record->likes()->firstOrCreate([
+        $record->unlikes()->firstOrCreate([
             'user_id' => $user->id,
         ]);
 
@@ -42,15 +43,26 @@ class LikeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Unlike  $unlike
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function show(Unlike $unlike)
     {
-        $like->delete();
+        //
+    }
 
-        return redirect()->route('record.show', $like->liked);
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Unlike  $unlike
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Unlike $unlike)
+    {
+        $unlike->delete();
+
+        return redirect()->route('record.show', $unlike->unliked);
     }
 }

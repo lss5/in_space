@@ -33,6 +33,7 @@
                 <a href="{{ route('record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                 <a href="{{ route('playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>
                 <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
+                <a href="{{ route('unlike.index') }}" class="dropdown-item">Не понравились</a>
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
                 @can('admin')
                     <hr class="dropdown-divider">

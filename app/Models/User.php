@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->orderBy('created_at', 'desc');
     }
 
+    public function unlikes()
+    {
+        return $this->hasMany(Unlike::class)->orderBy('created_at', 'desc');
+    }
+
     public function plays()
     {
         return $this->hasMany(Play::class);

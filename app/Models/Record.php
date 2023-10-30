@@ -55,6 +55,11 @@ class Record extends Model
         return $this->morphMany(Like::class, 'parent');
     }
 
+    public function unlikes()
+    {
+        return $this->morphMany(Unlike::class, 'parent');
+    }
+
     public function genres()
     {
         return $this->morphToMany(Genre::class, 'genreable');

@@ -8,18 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UnlikeController;
 use App\Http\Controllers\UserController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes();
 
@@ -72,6 +62,13 @@ Route::prefix('like')->name('like.')->group(function(){
     Route::get('/', [LikeController::class ,'index'])->name('index');
     Route::get('/{record}', [LikeController::class ,'create'])->name('create');
     Route::get('/{like}/unlike', [LikeController::class ,'destroy'])->name('delete');
+});
+
+//Unlike
+Route::prefix('unlike')->name('unlike.')->group(function(){
+    Route::get('/', [UnlikeController::class ,'index'])->name('index');
+    Route::get('/{record}', [UnlikeController::class ,'create'])->name('create');
+    Route::get('/{unlike}/unlike', [UnlikeController::class ,'destroy'])->name('delete');
 });
 
 //Genre
