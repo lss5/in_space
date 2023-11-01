@@ -20,6 +20,12 @@ class Record extends Model
         'description',
     ];
 
+    public static $statuses = [
+        'created',
+        'active',
+        'banned',
+    ];
+
     public function artist()
     {
         return $this->belongsTo(Artist::class);
@@ -68,6 +74,11 @@ class Record extends Model
     public function plays()
     {
         return $this->hasMany(Play::class);
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', 'active');
     }
 
     public function delete()

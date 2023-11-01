@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">{{ __('record.form_create_title') }}</h1>
             <hr class="py-1">
-            <form method="POST" action="{{ route('record.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.record.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">

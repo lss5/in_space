@@ -12,7 +12,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
-                        <label for="artist">Статус</label>
+                        <label for="status">Статус</label>
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
                         @error('status')

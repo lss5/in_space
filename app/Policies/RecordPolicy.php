@@ -45,7 +45,7 @@ class RecordPolicy
      */
     public function view(?User $user, Record $record)
     {
-        return true;
+        return optional($user)->id === $record->user_id || $record->status == 'active';
     }
 
     /**

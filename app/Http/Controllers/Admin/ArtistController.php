@@ -11,6 +11,12 @@ use App\Models\Genre;
 
 class ArtistController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:moder,admin');
+    }
+
     public function index()
     {
         return view('admin.artist.index', [

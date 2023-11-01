@@ -3,7 +3,6 @@
 use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LikeController;
@@ -14,10 +13,19 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\User\ArtistController as UserArtistController;
 use App\Http\Controllers\Admin\ArtistController as AdminArtistController;
 
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\User\RecordController as UserRecordController;
+use App\Http\Controllers\Admin\RecordController as AdminRecordController;
+
 Auth::routes();
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
+// Artist for all users
+Route::prefix('artist')->name('artist.')->group(function(){
+    Route::get('/', [ArtistController::class ,'index'])->name('index');
+    Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
+});
 // Artist for registered user
 Route::prefix('user/artist')->name('user.artist.')->group(function(){
     Route::get('/', [UserArtistController::class ,'index'])->name('index');
@@ -28,13 +36,8 @@ Route::prefix('user/artist')->name('user.artist.')->group(function(){
     Route::put('/{artist}', [UserArtistController::class ,'update'])->name('update');
     Route::delete('/{artist}', [UserArtistController::class ,'destroy'])->name('destroy');
 });
-// Artist for all users
-Route::prefix('artist')->name('artist.')->group(function(){
-    Route::get('/', [ArtistController::class ,'index'])->name('index');
-    Route::get('/{artist}', [ArtistController::class ,'show'])->name('show');
-});
-// Artist for administrator
-Route::prefix('admin/artist')->name('admin.artist.')->middleware('auth', 'can:moder,admin')->group(function(){
+// Artist for Administrator
+Route::prefix('admin/artist')->name('admin.artist.')->group(function(){
     Route::get('/', [AdminArtistController::class ,'index'])->name('index');
     // Route::get('/{artist}', [AdminArtistController::class ,'show'])->name('show');
     Route::get('/{artist}/edit', [AdminArtistController::class ,'edit'])->name('edit');
@@ -42,17 +45,30 @@ Route::prefix('admin/artist')->name('admin.artist.')->middleware('auth', 'can:mo
     Route::delete('/{artist}', [AdminArtistController::class ,'destroy'])->name('destroy');
 });
 
-//Record
+// Record for all users
 Route::prefix('record')->name('record.')->group(function(){
     Route::get('/', [RecordController::class ,'index'])->name('index');
-    Route::get('/create', [RecordController::class ,'create'])->name('create');
-    Route::post('/', [RecordController::class ,'store'])->name('store');
     Route::get('/{record}', [RecordController::class ,'show'])->name('show');
-    Route::get('/{record}/edit', [RecordController::class ,'edit'])->name('edit');
-    Route::get('/{record}/to_playlist/{playlist}', [RecordController::class ,'to_playlist'])->name('to_playlist');
-    Route::get('/{record}/out_playlist/{playlist}', [RecordController::class ,'out_playlist'])->name('out_playlist');
-    Route::put('/{record}', [RecordController::class ,'update'])->name('update');
-    Route::delete('/{record}', [RecordController::class ,'destroy'])->name('destroy');
+});
+// Record for registered user
+Route::prefix('user/record')->name('user.record.')->group(function(){
+    Route::get('/', [UserRecordController::class ,'index'])->name('index');
+    Route::get('/create', [UserRecordController::class ,'create'])->name('create');
+    Route::post('/', [UserRecordController::class ,'store'])->name('store');
+    Route::get('/{record}', [UserRecordController::class ,'show'])->name('show');
+    Route::get('/{record}/edit', [UserRecordController::class ,'edit'])->name('edit');
+    Route::get('/{record}/to_playlist/{playlist}', [UserRecordController::class ,'to_playlist'])->name('to_playlist');
+    Route::get('/{record}/out_playlist/{playlist}', [UserRecordController::class ,'out_playlist'])->name('out_playlist');
+    Route::put('/{record}', [UserRecordController::class ,'update'])->name('update');
+    Route::delete('/{record}', [UserRecordController::class ,'destroy'])->name('destroy');
+});
+// Record for Administrator
+Route::prefix('admin/record')->name('admin.record.')->group(function(){
+    Route::get('/', [AdminRecordController::class ,'index'])->name('index');
+    // Route::get('/{record}', [AdminRecordController::class ,'show'])->name('show');
+    Route::get('/{record}/edit', [AdminRecordController::class ,'edit'])->name('edit');
+    Route::put('/{record}', [AdminRecordController::class ,'update'])->name('update');
+    Route::delete('/{record}', [AdminRecordController::class ,'destroy'])->name('destroy');
 });
 
 //Playlist

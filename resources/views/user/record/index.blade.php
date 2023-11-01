@@ -5,15 +5,18 @@
 <div class="container">
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
-            <h1>Все записи</h1>
-
+            <h1>{{ $user->name }}</h1>
+            <div class="d-flex justify-content-between my-2">
+                <h2 class="m-0">{{ __('record.menu_name') }}</h2>
+                <a href="{{ route('user.record.create') }}" type="button" class="btn btn-secondary">{{ __('button.add_record') }}</a>
+            </div>
             <hr class="py-1">
 
             <div class="list-group">
             @forelse($records as $record)
                 <div class="list-group-item">
                     <div class="d-flex w-100 justify-content-between">
-                        <a href="{{ route('record.show', $record) }}" class="text-decoration-none d-flex flex-row align-items-center w-25">
+                        <a href="{{ route('user.record.show', $record) }}" class="text-decoration-none d-flex flex-row align-items-center w-25">
                             <div class="me-3 d-flex flex-column align-items-center w-25">
                                 @if($record->images->count() > 0)
                                     <img src="{{ asset('storage/'.$record->latestImage->link) }}" alt="" class="img img-fluid">
@@ -50,6 +53,10 @@
                                 Добавлен:
                                 {{ $record->created_at->diffForHumans() }}
                             </small>
+                            <small class="text-body-secondary">
+                                Статус:
+                                {{ $record->status }}
+                            </small>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Плейлист
@@ -60,20 +67,20 @@
                                         <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
                                     </svg>
                                 </button>
-                                {{-- <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
                                     @forelse($playlists as $playlist)
-                                        <li><a class="dropdown-item" href="{{ route('record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('user.record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
                                     @empty
                                         <li>Нет</li>
                                     @endforelse
-                                </ul> --}}
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Нет загруженных записей</h5>
+                    <h5 class="mb-1">Нет добавленых записей</h5>
                     <small class="text-body-secondary text-muted">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
                             <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>

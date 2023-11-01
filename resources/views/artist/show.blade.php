@@ -24,7 +24,7 @@
                     <div class="d-flex flex-row">
                     @can('update', $artist)
                         <a href="{{ route('user.artist.edit', $artist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
-                        <a href="{{ route('record.create') }}" class="btn btn-secondary mx-1">{{ __('button.add_record') }}</a>
+                        <a href="{{ route('user.record.create') }}" class="btn btn-secondary mx-1">{{ __('button.add_record') }}</a>
                         <a href="{{ route('user.artist.index') }}" class="btn btn-outline-secondary mx-1">Все Артисты</a>
                     @endcan
                     </div>
@@ -83,7 +83,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         @forelse($playlists as $playlist)
-                                            <li><a class="dropdown-item" href="{{ route('record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('user.record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
                                         @empty
                                             <li>Нет</li>
                                         @endforelse
