@@ -18,8 +18,11 @@ class RecordController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
         return view('record.index', [
             'records' => Record::active()->orderBy('created_at', 'desc')->get(),
+            'playlists' => $user ? $user->playlists : [],
         ]);
     }
 

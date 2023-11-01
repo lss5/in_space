@@ -9,8 +9,8 @@
                     <h1 class="h4 m-0">Плейлист: {{ $playlist->name }}</h1>
                 </div>
                 <div class="d-flex">
-                    <a href="{{ route('playlist.edit', $playlist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
-                    <a href="{{ route('playlist.index') }}" class="btn btn-outline-secondary mx-1">Все плейлисты</a>
+                    <a href="{{ route('user.playlist.edit', $playlist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
+                    <a href="{{ route('user.playlist.index') }}" class="btn btn-outline-secondary mx-1">Мои плейлисты</a>
                 </div>
             </div>
             <hr class="py-1">
@@ -50,7 +50,7 @@
                                     Добавлен:
                                     {{ $record->created_at->diffForHumans() }}
                                 </small>
-                                <a href="{{ route('record.out_playlist', [$record, $playlist]) }}" class="btn btn-sm btn-danger">Удалить</a>
+                                <a href="{{ route('playlist.record.destroy', [$playlist, $record]) }}" class="btn btn-sm btn-danger">Удалить</a>
                             </div>
                         </div>
                     </div>

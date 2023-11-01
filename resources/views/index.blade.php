@@ -59,7 +59,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         @forelse($playlists as $playlist)
-                                            <li><a class="dropdown-item" href="{{ route('user.record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('playlist.record.update', [$playlist, $record]) }}">{{ $playlist->name }}</a></li>
                                         @empty
                                             <li>Нет</li>
                                         @endforelse

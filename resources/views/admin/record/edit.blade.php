@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('button.save') }}</button>
-                            <a href="{{ route('record.show', $record) }}" class="btn btn-secondary mx-1">{{ __('button.back') }}</a>
+                            <a href="{{ route('admin.record.index', $record) }}" class="btn btn-secondary mx-1">{{ __('button.back') }}</a>
                             <a type="button" class="btn btn-danger mx-1"
                                onclick="event.preventDefault();
                                 document.getElementById('delete_form').submit();">

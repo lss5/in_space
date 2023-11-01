@@ -6,7 +6,7 @@
             <div class="col-12 col-lg-8 mx-auto">
                 <h1 class="h4 my-2">{{ $record->name }}</h1>
                 <hr class="py-1">
-                <form method="POST" action="{{ route('record.update', $record) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('user.record.update', $record) }}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="row">
@@ -89,7 +89,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('button.save') }}</button>
-                            <a href="{{ route('record.show', $record) }}" class="btn btn-secondary mx-1">{{ __('button.back') }}</a>
+                            <a href="{{ route('user.record.show', $record) }}" class="btn btn-secondary mx-1">{{ __('button.back') }}</a>
                             <a type="button" class="btn btn-danger mx-1"
                                onclick="event.preventDefault();
                                 document.getElementById('delete_form').submit();">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </form>
-                <form id="delete_form" action="{{ route('record.destroy', $record) }}" method="POST" class="d-none">
+                <form id="delete_form" action="{{ route('user.record.destroy', $record) }}" method="POST" class="d-none">
                     @method('DELETE')
                     @csrf
                 </form>

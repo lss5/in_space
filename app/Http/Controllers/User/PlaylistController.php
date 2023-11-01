@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePlaylistRequest;
 use App\Http\Requests\UpdatePlaylistRequest;
 use App\Models\Playlist;
@@ -22,7 +23,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        return view('playlist.index', [
+        return view('user.playlist.index', [
             'playlists' => Auth::user()->playlists,
         ]);
     }
@@ -34,7 +35,7 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        return view('playlist.create');
+        return view('user.playlist.create');
     }
 
     /**
@@ -51,7 +52,7 @@ class PlaylistController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('playlist.index');
+        return redirect()->route('user.playlist.index');
     }
 
     /**
@@ -62,7 +63,7 @@ class PlaylistController extends Controller
      */
     public function show(Playlist $playlist)
     {
-        return view('playlist.show', [
+        return view('user.playlist.show', [
             'playlist' => $playlist,
         ]);
     }
@@ -75,7 +76,7 @@ class PlaylistController extends Controller
      */
     public function edit(Playlist $playlist)
     {
-        return view('playlist.edit', [
+        return view('user.playlist.edit', [
             'playlist' => $playlist,
         ]);
     }
@@ -93,7 +94,7 @@ class PlaylistController extends Controller
         $playlist->description = $request->description;
         $playlist->save();
 
-        return redirect()->route('playlist.show', $playlist);
+        return redirect()->route('user.playlist.show', $playlist);
     }
 
     /**
@@ -107,6 +108,6 @@ class PlaylistController extends Controller
         $playlist->records()->detach();
         $playlist->delete();
 
-        return redirect()->route('playlist.index');
+        return redirect()->route('user.playlist.index');
     }
 }

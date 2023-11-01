@@ -23,4 +23,11 @@ class Playlist extends Model
         return $this->belongsToMany(Record::class)
             ->withTimestamps();
     }
+
+    public function delete()
+    {
+        $this->records()->detach();
+
+        return parent::delete();
+    }
 }

@@ -4,7 +4,6 @@ use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UnlikeController;
 use App\Http\Controllers\Admin\UserController;
@@ -16,6 +15,9 @@ use App\Http\Controllers\Admin\ArtistController as AdminArtistController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\User\RecordController as UserRecordController;
 use App\Http\Controllers\Admin\RecordController as AdminRecordController;
+
+use App\Http\Controllers\User\PlaylistController;
+use App\Http\Controllers\User\PlaylistRecordController;
 
 Auth::routes();
 
@@ -71,8 +73,8 @@ Route::prefix('admin/record')->name('admin.record.')->group(function(){
     Route::delete('/{record}', [AdminRecordController::class ,'destroy'])->name('destroy');
 });
 
-//Playlist
-Route::prefix('playlist')->name('playlist.')->group(function(){
+// Playlist
+Route::prefix('user/playlist')->name('user.playlist.')->group(function(){
     Route::get('/', [PlaylistController::class ,'index'])->name('index');
     Route::get('/create', [PlaylistController::class ,'create'])->name('create');
     Route::get('/{playlist}', [PlaylistController::class ,'show'])->name('show');
@@ -81,6 +83,12 @@ Route::prefix('playlist')->name('playlist.')->group(function(){
     Route::put('/{playlist}', [PlaylistController::class ,'update'])->name('update');
     Route::delete('/{playlist}', [PlaylistController::class ,'destroy'])->name('destroy');
 });
+// Playlist relations with Record
+Route::prefix('user/playlist')->name('playlist.record.')->group(function(){
+    Route::get('/{playlist}/add/{record}', [PlaylistRecordController::class ,'update'])->name('update');
+    Route::get('/{playlist}/remove/{record}', [PlaylistRecordController::class ,'destroy'])->name('destroy');
+});
+
 
 // Profile
 Route::prefix('profile')->name('profile.')->group(function() {

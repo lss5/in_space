@@ -60,13 +60,13 @@
                                         <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
                                     </svg>
                                 </button>
-                                {{-- <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
                                     @forelse($playlists as $playlist)
-                                        <li><a class="dropdown-item" href="{{ route('record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('playlist.record.update', [$playlist, $record]) }}">{{ $playlist->name }}</a></li>
                                     @empty
                                         <li>Нет</li>
                                     @endforelse
-                                </ul> --}}
+                                </ul>
                             </div>
                         </div>
                     </div>

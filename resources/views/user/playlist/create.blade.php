@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-8 mx-auto">
             <h1 class="h4 my-2">Создать плейлист</h1>
             <hr class="py-1">
-            <form method="POST" action="{{ route('playlist.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.playlist.store') }}" enctype="multipart/form-data">
                 @csrf
                 <!-- <div class="row my-2">
                     <div class="col-sm-12 col-lg-3">

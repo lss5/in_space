@@ -57,11 +57,11 @@
             </div>
         @endif
 
-            <h2 class="my-2"><a href="{{ route('playlist.index') }}" class="text-decoration-none">Мои плейлисты: {{ $playlists->count() }}</a></h2>
+            <h2 class="my-2"><a href="{{ route('user.playlist.index') }}" class="text-decoration-none">Мои плейлисты: {{ $playlists->count() }}</a></h2>
             @if($playlists->count() > 0)
                 <ul class="list-group">
                     @foreach($playlists as $playlist)
-                        <a href="{{ route('playlist.show', $playlist) }}" class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ route('user.playlist.show', $playlist) }}" class="list-group-item d-flex justify-content-between align-items-center">
                             {{ $playlist->name }}
                             <span class="badge bg-secondary rounded-pill">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">

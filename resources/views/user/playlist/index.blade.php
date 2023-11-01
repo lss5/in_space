@@ -8,13 +8,13 @@
             <h1>{{ Auth::user()->name }}</h1>
             <div class="d-flex justify-content-between my-2">
                 <h2 class="m-0">Мои плейлисты</h2>
-                <a href="{{ route('playlist.create') }}" type="button" class="btn btn-secondary">{{ __('button.create') }}</a>
+                <a href="{{ route('user.playlist.create') }}" type="button" class="btn btn-secondary">{{ __('button.create') }}</a>
             </div>
             <hr class="py-1">
 
             <div class="list-group">
                 @forelse($playlists as $playlist)
-                    <a href="{{ route('playlist.show', $playlist) }}" class="list-group-item list-group-item-action">
+                    <a href="{{ route('user.playlist.show', $playlist) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{ $playlist->name }}</h5>
 {{--                            @dd($playlist->records()->orderByPivot('created_at', 'asc')->first()->name)--}}

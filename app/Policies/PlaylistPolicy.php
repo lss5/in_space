@@ -60,7 +60,7 @@ class PlaylistPolicy
      */
     public function update(User $user, Playlist $playlist)
     {
-        return true;
+        return $user->id === $playlist->user_id;
     }
 
     /**
@@ -72,7 +72,7 @@ class PlaylistPolicy
      */
     public function delete(User $user, Playlist $playlist)
     {
-        return true;
+        return $user->id === $playlist->user_id;
     }
 
     /**

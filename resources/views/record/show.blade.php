@@ -58,18 +58,7 @@
                             </svg>
                         </a>
                     @endif
-                    <div class="dropdown mx-1">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Добавить в плейлист
-                        </button>
-                        <ul class="dropdown-menu">
-                            @forelse($playlists as $playlist)
-                                <li><a class="dropdown-item" href="{{ route('user.record.to_playlist', [$record, $playlist]) }}">{{ $playlist->name }}</a></li>
-                            @empty
-                                <li>Плейлисты не созданы</li>
-                            @endforelse
-                        </ul>
-                    </div>
+                    @include('partial.playlist_button')
                 @endauth
                 @can('update', $record)
                     <a href="{{ route('user.record.edit', $record) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>

@@ -179,25 +179,4 @@ class RecordController extends Controller
         return redirect()->route('user.record.index');
     }
 
-    public function to_playlist(Request $request, Record $record, Playlist $playlist)
-    {
-        // TODO: add validates
-        if ($request->user()->can('update', $playlist)){
-            $playlist->records()->syncWithoutDetaching($record);
-
-            return redirect()->route('playlist.show', $playlist);
-        }
-        return abort(404);
-    }
-
-    public function out_playlist(Request $request, Record $record, Playlist $playlist)
-    {
-        // TODO: add validates
-        if ($request->user()->can('update', $playlist)){
-            $playlist->records()->detach($record);
-
-            return redirect()->route('playlist.show', $playlist);
-        }
-        return abort(404);
-    }
 }

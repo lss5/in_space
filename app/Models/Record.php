@@ -83,7 +83,7 @@ class Record extends Model
 
     public function delete()
     {
-        // Deleting relations Records
+        // Deleting relations Images
         foreach ($this->images as $image) {
             $image->delete();
         }
@@ -92,6 +92,10 @@ class Record extends Model
         if (Storage::disk('public')->exists($this->link)) {
             Storage::disk('public')->delete($this->link);
         }
+
+        // Deleting relations with Playlist
+        $this->playlists()->detach();
+
         return parent::delete();
     }
 
