@@ -20,7 +20,7 @@ class RecordPolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->hasRole('admin')) {
+        if ($user->hasAnyRoles(['moder', 'admin'])) {
             return true;
         }
     }

@@ -36,14 +36,15 @@
                 <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
                 <a href="{{ route('unlike.index') }}" class="dropdown-item">Не понравились</a>
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
-                @can('moder','admin')
+                @can('moder')
                     <hr class="dropdown-divider">
                     <a href="{{ route('admin.artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                     <a href="{{ route('admin.record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                     <a href="{{ route('genre.index') }}" class="dropdown-item">Жанры</a>
+                @endcan
+                @can('admin')
                     <a href="{{ route('user.index') }}" class="dropdown-item">Пользователи</a>
                 @endcan
-                    
                 <hr class="dropdown-divider">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();

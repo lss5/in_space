@@ -114,7 +114,7 @@ Route::prefix('genre')->name('genre.')->group(function(){
 });
 
 // Users Administration
-Route::prefix('admin/users')->name('user.')->middleware('auth','can:admin')->group(function(){
+Route::prefix('admin/users')->name('user.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('update');

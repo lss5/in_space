@@ -13,8 +13,7 @@ class ArtistController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('can:moder,admin');
+        $this->middleware(['auth','can:moder,admin']);
     }
 
     public function index()
