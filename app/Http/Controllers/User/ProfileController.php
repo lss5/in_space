@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Artist;
 use App\Models\Record;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-//        $this->middleware('log')->only('index');
-//        $this->middleware('auth')->except('index');
     }
 
     /**
@@ -25,9 +24,33 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        // All system capabilities
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
         $profile = Auth::user();
 
-        return view('profile.index', [
+        return view('users.profile.edit', [
+            'profile' => $profile,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        $profile = Auth::user();
+
+        return view('users.profile.index', [
             'profile' => $profile,
             'artists' => $profile
                 ->artists()
@@ -53,42 +76,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        $profile = Auth::user();
-
-        return view('profile.edit', [
-            'profile' => $profile,
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -96,6 +83,10 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request, User $user)
     {
+        if(Auth::id() !== $user->id) {
+            return redirect()->route('user.profile')->with('warning', 'Произошла ошибка. Перезагрузите страницу.');
+        }
+
         if ($request->hasFile('image')) {
             // delete old images
             foreach ($user->images as $image) {
@@ -112,7 +103,7 @@ class ProfileController extends Controller
         $user->description = $request->description;
         $user->save();
 
-        return redirect()->route('profile.index');
+        return redirect()->route('user.profile.show');
     }
 
     /**
@@ -123,6 +114,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Send request to remove
     }
 }

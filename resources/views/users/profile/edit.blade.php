@@ -6,7 +6,7 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>{{ __('profile.title') }}</h1>
-            <form method="POST" action="{{ route('profile.update', ['user'=> $profile]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.profile.update', ['user'=> $profile]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

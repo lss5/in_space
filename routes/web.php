@@ -1,9 +1,7 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UnlikeController;
 
@@ -22,6 +20,8 @@ use App\Http\Controllers\Admin\RecordController as AdminRecordController;
 
 use App\Http\Controllers\User\PlaylistController;
 use App\Http\Controllers\User\PlaylistRecordController;
+
+use App\Http\Controllers\User\ProfileController;
 
 Auth::routes();
 
@@ -94,8 +94,8 @@ Route::prefix('user/playlist')->name('playlist.record.')->group(function(){
 });
 
 // Profile
-Route::prefix('profile')->name('profile.')->group(function() {
-    Route::get('/', [ProfileController::class, 'index'])->name('index');
+Route::prefix('user/profile')->name('user.profile.')->group(function() {
+    Route::get('/', [ProfileController::class, 'show'])->name('show');
     Route::get('/edit', [ProfileController::class ,'edit'])->name('edit');
     Route::put('/{user}', [ProfileController::class ,'update'])->name('update');
 });
