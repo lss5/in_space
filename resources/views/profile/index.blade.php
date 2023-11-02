@@ -31,7 +31,7 @@
             </div>
         @endif
 
-            <h2 class="my-2"><a href="{{ route('record.index') }}" class="text-decoration-none">Мои записи: {{ $records->count() }}</a></h2>
+            <h2 class="my-2"><a href="{{ route('user.record.index') }}" class="text-decoration-none">Мои записи: {{ $records->count() }}</a></h2>
         @if($records->count() > 0)
             <div class="list-group">
                 @foreach($records as $record)

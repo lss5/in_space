@@ -28,7 +28,7 @@ class ArtistController extends Controller
     {
         $user = Auth::user();
 
-        return view('user.artist.index', [
+        return view('users.artist.index', [
             'user' => $user,
             'artists' => $user->artists,
         ]);
@@ -41,7 +41,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('user.artist.create', [
+        return view('users.artist.create', [
             'genres' => Genre::all(),
         ]);
     }
@@ -85,7 +85,7 @@ class ArtistController extends Controller
             $playlists = Auth::user()->playlists;
         }
 
-        return view('user.artist.show', [
+        return view('users.artist.show', [
             'artist' => $artist,
             'records' => $artist->records,
             'playlists' => $playlists,
@@ -100,7 +100,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        return view('user.artist.edit', [
+        return view('users.artist.edit', [
             'artist' => $artist,
             'genres' => Genre::all(),
         ]);

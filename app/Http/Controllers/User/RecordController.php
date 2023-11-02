@@ -30,7 +30,7 @@ class RecordController extends Controller
     {
         $user = Auth::user();
 
-        return view('user.record.index', [
+        return view('users.record.index', [
             'user' => $user,
             'records' => $user->records()->orderBy('created_at', 'desc')->get(),
             'playlists' => $user->playlists,
@@ -47,7 +47,7 @@ class RecordController extends Controller
         $artists = Auth::user()->artists()->active()->get();
 
         if ($artists->count() > 0) {
-            return view('user.record.create', [
+            return view('users.record.create', [
                 'artists' => $artists,
                 'genres' => Genre::all(),
             ]);
@@ -107,7 +107,7 @@ class RecordController extends Controller
             $unlike = $record->unlikes()->where('user_id', $user->id)->first();
         }
 
-        return view('user.record.show', [
+        return view('users.record.show', [
             'record' => $record,
             'playlists' => $playlists,
             'like' => $like,
@@ -124,7 +124,7 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        return view('user.record.edit', [
+        return view('users.record.edit', [
             'record' => $record,
             'genres' => Genre::all(),
         ]);

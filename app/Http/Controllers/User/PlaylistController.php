@@ -23,7 +23,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        return view('user.playlist.index', [
+        return view('users.playlist.index', [
             'playlists' => Auth::user()->playlists,
         ]);
     }
@@ -35,7 +35,7 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        return view('user.playlist.create');
+        return view('users.playlist.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class PlaylistController extends Controller
      */
     public function show(Playlist $playlist)
     {
-        return view('user.playlist.show', [
+        return view('users.playlist.show', [
             'playlist' => $playlist,
         ]);
     }
@@ -76,7 +76,7 @@ class PlaylistController extends Controller
      */
     public function edit(Playlist $playlist)
     {
-        return view('user.playlist.edit', [
+        return view('users.playlist.edit', [
             'playlist' => $playlist,
         ]);
     }
