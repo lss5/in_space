@@ -8,23 +8,23 @@
                     <img src="{{ asset('storage/'.$record->latestImage->link) }}" class="img-thumbnail" alt="" style="width: 200px">
                 @endif
                 <h1 class="h4 my-2">Запись: {{ $record->name }}</h1>
-                <p>Артист:
+                <span>Артист:
                     @if($record->artist)
                         <a href="{{ route('artist.show', $record->artist) }}">{{ $record->artist->name }}</a>
                     @else
                         {{ __('artist.deleted') }}
                     @endif
-                </p>
-                <p>Описание: {{ $record->description }}</p>
-                <p>Жанр:
+                </span>
+                <span>Описание: {{ $record->description }}</span>
+                <span>Жанр:
                 @forelse($record->genres as $genre)
-                    {{ $genre->name }}
+                    <a href="{{ route('genre.record.show', $genre) }}">{{ $genre->name }}</a>
                 @empty
                     Неизвестен
                 @endforelse
-                </p>
-                <p>Год: {{ $record->created_at->format('Y') }}</p>
-                <p>Воспроизведений: {{ $plays }}</p>
+                </span>
+                <span>Год: {{ $record->created_at->format('Y') }}</span>
+                <span>Воспроизведений: {{ $plays }}</span>
                 <audio controls class="w-100">
                     <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
                     Тег audio не поддерживается вашим браузером.

@@ -35,9 +35,9 @@ class ArtistController extends Controller
     public function update(Request $request, Artist $artist)
     {
         $request->validate([
-            'name' => 'required|string|min:4|max:255',
+            'name' => 'required|string|min:2|max:255',
             'description' => 'nullable|string|max:61440',
-            'genre'  => 'required|integer|exists:genres,id',
+            'genre'  => 'required|array|exists:genres,id',
             'status' => ['required', 'string', Rule::in(Artist::$statuses)],
         ]);
 

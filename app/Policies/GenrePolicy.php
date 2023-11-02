@@ -25,7 +25,7 @@ class GenrePolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -37,7 +37,7 @@ class GenrePolicy
      */
     public function view(User $user, Genre $genre)
     {
-        //
+        return false;
     }
 
     /**

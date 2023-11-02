@@ -19,13 +19,9 @@
                             {{ $message }}
                         </small>
                         @enderror
-                        <select  name="genre" id="genre" class="form-select @error('genre') is-invalid @enderror" aria-describedby="artistHelp">
+                        <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" id="genre" multiple size="4" aria-label="Genre">
                             @foreach ($genres as $genre)
-                                @if($artist->genres()->first())
-                                    <option value="{{ $genre->id }}" @if(old('genre') == $genre->id || $artist->genres()->first()->id == $genre->id) selected @endif>{{ $genre->name }}</option>
-                                @else
-                                    <option value="{{ $genre->id }}" @if(old('genre') == $genre->id) selected @endif>{{ $genre->name }}</option>
-                                @endif
+                                <option value="{{ $genre->id }}" @if(collect(old('genre'))->contains($genre->id) || $artist->genres->pluck('id')->contains($genre->id)) selected @endif>{{ $genre->name }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-muted">Выберите Жанр из списка доступных</small>

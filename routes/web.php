@@ -1,12 +1,16 @@
 <?php
 
-use App\Http\Controllers\GenreController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UnlikeController;
+
 use App\Http\Controllers\Admin\UserController;
+
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\User\ArtistController as UserArtistController;
@@ -89,7 +93,6 @@ Route::prefix('user/playlist')->name('playlist.record.')->group(function(){
     Route::get('/{playlist}/remove/{record}', [PlaylistRecordController::class ,'destroy'])->name('destroy');
 });
 
-
 // Profile
 Route::prefix('profile')->name('profile.')->group(function() {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
@@ -112,13 +115,15 @@ Route::prefix('unlike')->name('unlike.')->group(function(){
 });
 
 //Genre
-Route::prefix('genre')->name('genre.')->group(function(){
-    Route::get('/', [GenreController::class ,'index'])->name('index');
-    Route::get('/create', [GenreController::class ,'create'])->name('create');
-    Route::get('/{genre}/edit', [GenreController::class ,'edit'])->name('edit');
-    Route::post('/', [GenreController::class ,'store'])->name('store');
-    Route::put('/{genre}', [GenreController::class ,'update'])->name('update');
-    // Route::delete('/{genre}', [GenreController::class ,'destroy'])->name('destroy');
+Route::get('/genre/record', [GenreController::class, 'index'])->name('genre.record.index');
+Route::get('genre/{genre}', [GenreController::class, 'show'])->name('genre.record.show');
+Route::prefix('admin/genre')->name('genre.')->group(function(){
+    Route::get('/', [AdminGenreController::class, 'index'])->name('index');
+    Route::get('/create', [AdminGenreController::class, 'create'])->name('create');
+    Route::get('/{genre}/edit', [AdminGenreController::class, 'edit'])->name('edit');
+    Route::post('/', [AdminGenreController::class, 'store'])->name('store');
+    Route::put('/{genre}', [AdminGenreController::class, 'update'])->name('update');
+    // Route::delete('/{genre}', [AdminGenreController::class, 'destroy'])->name('destroy');
 });
 
 // Users Administration

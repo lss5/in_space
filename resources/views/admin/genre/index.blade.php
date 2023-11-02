@@ -7,19 +7,19 @@
         <div class="col-12 col-lg-8 mx-auto">
             <div class="d-flex justify-content-between my-2">
                 <h2 class="m-0">Жанры</h2>
+                <a href="{{ route('genre.create') }}" type="button" class="btn btn-secondary">{{ __('button.create') }}</a>
             </div>
-
             <hr class="py-1">
 
             <div class="list-group">
                 @forelse($genres as $genre)
-                    <a href="{{ route('genre.record.show', $genre) }}" class="list-group-item">
+                    <div class="list-group-item">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{ $genre->name }}</h5>
                             <small class="text-body-secondary">Записей: {{ $genre->records()->count() }}</small>
                         </div>
                         <p class="mb-1">{{ $genre->description }}</p>
-                    </a>
+                    </div>
                 @empty
                     <div class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">

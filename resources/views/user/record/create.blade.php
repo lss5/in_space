@@ -10,17 +10,17 @@
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
-                        <label for="artist">Жанр</label>
+                        <label for="genre">Жанр</label>
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
                         @error('genre')
-                        <small class="form-text text-danger">
-                            {{ $message }}
-                        </small>
+                            <small class="form-text text-danger">
+                                {{ $message }}
+                            </small>
                         @enderror
-                        <select  name="genre" id="genre" class="form-select @error('genre') is-invalid @enderror" aria-describedby="artistHelp">
+                        <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" id="genre" multiple size="4" aria-label="Genre">
                             @foreach ($genres as $genre)
-                                <option value="{{ $genre->id }}" @if(old('genre') == $genre->id) selected @endif>{{ $genre->name }}</option>
+                                <option value="{{ $genre->id }}" @if(collect(old('genre'))->contains($genre->id)) selected @endif>{{ $genre->name }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-muted">Выберите Жанр из списка доступных</small>
