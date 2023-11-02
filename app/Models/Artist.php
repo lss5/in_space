@@ -49,9 +49,9 @@ class Artist extends Model
         return $this->morphMany(Like::class, 'parent');
     }
 
-    public function unlikes()
+    public function dislikes()
     {
-        return $this->morphMany(Unlike::class, 'parent');
+        return $this->morphMany(Dislike::class, 'parent');
     }
 
     public function genres()
@@ -66,7 +66,7 @@ class Artist extends Model
 
     public function delete()
     {
-        // TODO: delete relation Likes and Unlikes
+        // TODO: delete relation Likes and Dislikes
 
         //Deleting relations Records
         foreach ($this->images as $image) {

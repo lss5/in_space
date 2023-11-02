@@ -33,8 +33,8 @@
                 <a href="{{ route('user.artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                 <a href="{{ route('user.record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                 <a href="{{ route('user.playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>
-                <a href="{{ route('like.index') }}" class="dropdown-item">Понравившиеся</a>
-                <a href="{{ route('unlike.index') }}" class="dropdown-item">Не понравились</a>
+                <a href="{{ route('user.like.index') }}" class="dropdown-item">Понравившиеся</a>
+                <a href="{{ route('user.dislike.index') }}" class="dropdown-item">Не понравились</a>
                 <a href="{{ route('user.profile.edit') }}" class="dropdown-item">{{ __('profile.menu_edit') }}</a>
                 @can('moder')
                     <hr class="dropdown-divider">

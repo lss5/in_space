@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Unlike extends Model
+class Dislike extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Unlike extends Model
     /**
      * Get the parent liked model (record or artist).
      */
-    public function unliked()
+    public function disliked()
     {
         return $this->morphTo('parent');
     }

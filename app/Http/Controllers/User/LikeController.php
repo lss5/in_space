@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Models\Like;
 use App\Models\Record;
-use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -20,7 +21,7 @@ class LikeController extends Controller
      */
     public function index()
     {
-        return view('like.index', [
+        return view('users.like.index', [
             'likes' => Auth::user()->likes,
         ]);
     }

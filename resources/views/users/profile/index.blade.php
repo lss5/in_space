@@ -79,7 +79,7 @@
                 Плейлисты не созданы
             @endif
 
-            <h2 class="my-2"><a href="{{ route('like.index') }}" class="text-decoration-none">Понравившиеся: {{ $liked->count() }}</a></h2>
+            <h2 class="my-2"><a href="{{ route('user.like.index') }}" class="text-decoration-none">Понравившиеся: {{ $liked->count() }}</a></h2>
             @if($liked->count() > 0)
                 <ul class="list-group">
                     @foreach($liked as $like)

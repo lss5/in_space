@@ -94,7 +94,7 @@ class RecordController extends Controller
         $user = Auth::user();
         $playlists = [];
         $like = null;
-        $unlike = null;
+        $dislike = null;
 
         if ($user) {
             $play = $user->plays()->firstOrCreate([
@@ -104,14 +104,14 @@ class RecordController extends Controller
 
             $playlists = $user->playlists;
             $like = $record->likes()->where('user_id', $user->id)->first();
-            $unlike = $record->unlikes()->where('user_id', $user->id)->first();
+            $dislike = $record->dislikes()->where('user_id', $user->id)->first();
         }
 
         return view('users.record.show', [
             'record' => $record,
             'playlists' => $playlists,
             'like' => $like,
-            'unlike' => $unlike,
+            'dislike' => $dislike,
             'plays' => $record->plays()->sum('count'),
         ]);
     }

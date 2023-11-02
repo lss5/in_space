@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\UnlikeController;
 
 use App\Http\Controllers\Admin\UserController;
 
@@ -22,6 +20,8 @@ use App\Http\Controllers\User\PlaylistController;
 use App\Http\Controllers\User\PlaylistRecordController;
 
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\LikeController;
+use App\Http\Controllers\User\DislikeController;
 
 Auth::routes();
 
@@ -100,18 +100,18 @@ Route::prefix('user/profile')->name('user.profile.')->group(function() {
     Route::put('/{user}', [ProfileController::class ,'update'])->name('update');
 });
 
-//Like
-Route::prefix('like')->name('like.')->group(function(){
+// Like
+Route::prefix('user/like')->name('user.like.')->group(function(){
     Route::get('/', [LikeController::class ,'index'])->name('index');
     Route::get('/{record}', [LikeController::class ,'create'])->name('create');
     Route::get('/{like}/unlike', [LikeController::class ,'destroy'])->name('delete');
 });
 
-//Unlike
-Route::prefix('unlike')->name('unlike.')->group(function(){
-    Route::get('/', [UnlikeController::class ,'index'])->name('index');
-    Route::get('/{record}', [UnlikeController::class ,'create'])->name('create');
-    Route::get('/{unlike}/unlike', [UnlikeController::class ,'destroy'])->name('delete');
+// Dislike
+Route::prefix('user/dislike')->name('user.dislike.')->group(function(){
+    Route::get('/', [DislikeController::class ,'index'])->name('index');
+    Route::get('/{record}', [DislikeController::class ,'create'])->name('create');
+    Route::get('/{dislike}/dislike', [DislikeController::class ,'destroy'])->name('delete');
 });
 
 //Genre

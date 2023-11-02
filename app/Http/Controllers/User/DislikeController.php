@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\Unlike;
-use App\Models\Record;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\Dislike;
+use App\Models\Record;
 
-class UnlikeController extends Controller
+class DislikeController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class UnlikeController extends Controller
      */
     public function index()
     {
-        return view('unlike.index', [
-            'unlikes' => Auth::user()->unlikes,
+        return view('users.dislike.index', [
+            'dislikes' => Auth::user()->dislikes,
         ]);
     }
 
@@ -33,10 +33,8 @@ class UnlikeController extends Controller
      */
     public function create(Record $record)
     {
-        $user = Auth::user();
-
-        $record->unlikes()->firstOrCreate([
-            'user_id' => $user->id,
+        $record->dislikes()->firstOrCreate([
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('record.show', $record);
@@ -45,10 +43,10 @@ class UnlikeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Unlike  $unlike
+     * @param  \App\Models\Dislike  $dislike
      * @return \Illuminate\Http\Response
      */
-    public function show(Unlike $unlike)
+    public function show(Dislike $dislike)
     {
         //
     }
@@ -56,13 +54,13 @@ class UnlikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Unlike  $unlike
+     * @param  \App\Models\Dislike  $dislike
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unlike $unlike)
+    public function destroy(Dislike $dislike)
     {
-        $unlike->delete();
+        $dislike->delete();
 
-        return redirect()->route('record.show', $unlike->unliked);
+        return redirect()->route('record.show', $dislike->disliked);
     }
 }
