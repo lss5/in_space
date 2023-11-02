@@ -11,7 +11,7 @@
 
             <div class="list-group">
             @forelse($users as $user)
-                <a href="{{ route('user.edit', $user) }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.user.edit', $user) }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $user->name }} {{ $user->last_name }}</h5>
                         <small class="text-body-secondary">Создан: {{ $user->created_at->format('d.m.Y') }}</small>

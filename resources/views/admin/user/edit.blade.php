@@ -11,7 +11,7 @@
                 @endif
                 {{ $user->name }} {{ $user->last_name }}
             </h1>
-            <form method="POST" action="{{ route('user.update', ['user'=> $user]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.user.update', ['user'=> $user]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 {{-- <div class="mb-3">

@@ -43,7 +43,7 @@
                     <a href="{{ route('genre.index') }}" class="dropdown-item">Жанры</a>
                 @endcan
                 @can('admin')
-                    <a href="{{ route('user.index') }}" class="dropdown-item">Пользователи</a>
+                    <a href="{{ route('admin.user.index') }}" class="dropdown-item">Пользователи</a>
                 @endcan
                 <hr class="dropdown-divider">
                 <a class="dropdown-item" href="{{ route('logout') }}"
