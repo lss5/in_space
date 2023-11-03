@@ -29,9 +29,9 @@
                     <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
                     Тег audio не поддерживается вашим браузером.
                 </audio>
+                @auth
                 <hr class="py-1">
                 <div class="d-flex flex-row align-items-center">
-                @auth
                     @if($like)
                         <a href="{{ route('user.like.delete', $like) }}" class="text-danger mx-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
@@ -59,11 +59,16 @@
                         </a>
                     @endif
                     @include('partial.playlist_button')
-                @endauth
-                @can('update', $record)
+                    @if ($purchase = $record->purchasers()->forUser(Auth::user())->first())
+                        <a href="{{ route('user.purchase.download', $purchase) }}" class="btn btn-primary mx-1" role="button" aria-pressed="false">Скачать</a>
+                    @else
+                        <a href="{{ route('user.purchase.create', $record) }}" class="btn btn-primary my-1">Купить</a>
+                    @endif
+                    @can('update', $record)
                     <a href="{{ route('user.record.edit', $record) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
                     <a href="{{ route('user.record.index') }}" class="btn btn-secondary mx-1">Все записи</a>
-                @endcan
+                    @endcan
+                @endauth
                 </div>
             </div>
         </div>

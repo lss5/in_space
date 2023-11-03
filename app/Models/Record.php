@@ -76,6 +76,11 @@ class Record extends Model
         return $this->hasMany(Play::class);
     }
 
+    public function purchasers()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     public function scopeActive(Builder $query)
     {
         return $query->where('status', 'active');

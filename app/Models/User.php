@@ -85,6 +85,11 @@ class User extends Authenticatable
         return $this->hasMany(Play::class);
     }
 
+    public function purchased()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     public function hasAnyRoles($roles)
     {
         if ($this->roles()->whereIn('uniq_name', $roles)->first()) {

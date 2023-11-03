@@ -68,6 +68,7 @@ class RecordController extends Controller
         $record->name = $request->name;
         $record->description = $request->description;
         $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
+        $record->extension = $request->file('audio')->getClientOriginalExtension();
         $record->user()->associate(Auth::user());
         $record->artist()->associate($request->artist);
         $record->save();

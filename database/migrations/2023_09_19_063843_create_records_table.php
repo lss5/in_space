@@ -24,6 +24,7 @@ class CreateRecordsTable extends Migration
 
             $table->string('name');
             $table->string('link');
+            $table->string('extension');
             $table->text('description')->nullable();
             $table->string('status', 36)->default('created');
         });

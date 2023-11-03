@@ -72,7 +72,9 @@
                                     </svg>
                                     {{ $record->created_at->diffForHumans() }}
                                 </small>
-                                @include('partial.playlist_button')
+                                @auth
+                                    @include('partial.playlist_button')
+                                @endauth
                             </div>
                         </div>
                     </div>

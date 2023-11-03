@@ -50,12 +50,13 @@
                         </div>
                         <div class="d-flex flex-column align-items-center justify-content-between">
                             <small class="text-body-secondary">
-                                Добавлен:
-                                {{ $record->created_at->diffForHumans() }}
+                                Добавлен: {{ $record->created_at->diffForHumans() }}
                             </small>
                             <small class="text-body-secondary">
-                                Статус:
-                                {{ $record->status }}
+                                Статус: {{ $record->status }}
+                            </small>
+                            <small class="text-body-secondary">
+                                Куплен: {{ $record->purchasers->count() }} раз(a)
                             </small>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

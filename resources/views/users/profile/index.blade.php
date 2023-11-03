@@ -26,9 +26,7 @@
                 @endforeach
             </div>
         @else
-            <div class="col-12">
-                <h5>Артисты не созданы</h5>
-            </div>
+            Артисты не созданы
         @endif
 
             <h2 class="my-2"><a href="{{ route('user.record.index') }}" class="text-decoration-none">Мои записи: {{ $records->count() }}</a></h2>
@@ -52,9 +50,7 @@
                 @endforeach
             </div>
         @else
-            <div class="col-12">
-                <h5>Записи не созданы</h5>
-            </div>
+            Записи не созданы
         @endif
 
             <h2 class="my-2"><a href="{{ route('user.playlist.index') }}" class="text-decoration-none">Мои плейлисты: {{ $playlists->count() }}</a></h2>

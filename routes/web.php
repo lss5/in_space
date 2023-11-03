@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\LikeController;
 use App\Http\Controllers\User\DislikeController;
+use App\Http\Controllers\User\PurchaseController;
 
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
@@ -119,6 +120,15 @@ Route::prefix('admin/genre')->name('genre.')->group(function(){
     Route::post('/', [AdminGenreController::class, 'store'])->name('store');
     Route::put('/{genre}', [AdminGenreController::class, 'update'])->name('update');
     // Route::delete('/{genre}', [AdminGenreController::class, 'destroy'])->name('destroy');
+});
+
+// Purchase
+Route::prefix('user/purchase')->name('user.purchase.')->group(function(){
+    Route::get('/', [PurchaseController::class, 'index'])->name('index');
+    Route::get('/buy/{record}', [PurchaseController::class, 'create'])->name('create');
+    Route::post('/', [PurchaseController::class, 'store'])->name('store');
+    Route::get('/{purchase}', [PurchaseController::class, 'show'])->name('show');
+    Route::get('/download/{purchase}', [PurchaseController::class, 'download'])->name('download');
 });
 
 // Users Administration
