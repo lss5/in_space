@@ -104,7 +104,7 @@
                         @if ($purchase = $record->purchasers()->forUser(Auth::user())->first())
                             <a href="{{ route('user.purchase.download', $purchase) }}" class="btn btn-sm btn-primary mx-1" role="button" aria-pressed="false">Скачать</a>
                         @else
-                            <a href="{{ route('user.purchase.create', $record) }}" class="btn btn-sm btn-primary my-1">Купить</a>
+                            <a href="{{ route('user.purchase.create', $record) }}" class="btn btn-sm btn-primary mx-1">Купить</a>
                         @endif
                         @isset($playlists)
                             <div class="dropdown my-1">

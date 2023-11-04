@@ -93,6 +93,16 @@ class Record extends Model
             $image->delete();
         }
 
+        // Deleting Like
+        foreach ($this->likes as $like) {
+            $like->delete();
+        }
+
+        // Deleting Dislike
+        foreach ($this->dislikes as $dislike) {
+            $dislike->delete();
+        }
+
         // Deleting record file
         if (Storage::disk('public')->exists($this->link)) {
             Storage::disk('public')->delete($this->link);
