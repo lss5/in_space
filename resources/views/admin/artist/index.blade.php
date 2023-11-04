@@ -6,8 +6,7 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>Все Артисты (модерация)</h1>
-            <hr class="py-1">
-
+        <hr class="py-1">
             <div class="list-group">
             @forelse($artists as $artist)
                 <a href="{{ route('admin.artist.edit', $artist) }}" class="list-group-item list-group-item-action">

@@ -13,47 +13,10 @@
                     <a href="{{ route('user.playlist.index') }}" class="btn btn-outline-secondary mx-1">Мои плейлисты</a>
                 </div>
             </div>
-            <hr class="py-1">
-
+        <hr class="py-1">
             <div class="list-group">
                 @forelse($playlist->records as $record)
-                    <div class="list-group-item">
-                        <div class="d-flex w-100 justify-content-between">
-                            <a href="{{ route('record.show', $record) }}" class="text-decoration-none d-flex flex-row align-items-center w-25">
-                                <div class="me-3 d-flex flex-column align-items-center w-25">
-                                    @if($record->images->count() > 0)
-                                        <img src="{{ asset('storage/'.$record->latestImage->link) }}" alt="" class="img img-fluid">
-                                    @else
-                                        <img src="{{ asset('images/no_artist.jpeg') }}" alt="" class="img img-fluid">
-                                    @endif
-                                </div>
-                                <div class="w-75">
-                                    <h5 class="mb-1">{{ $record->name }}</h5>
-                                    <p class="mb-1">
-                                        @isset($record->artist->name)
-                                            {{ $record->artist->name }}
-                                        @else
-                                            Неизвестен
-                                        @endisset
-                                    </p>
-                                    <small class="text-body-secondary">{{ $record->created_at->format('Y') }}</small>
-                                </div>
-                            </a>
-                            <div class="w-50 d-flex align-items-center">
-                                <audio controls class="w-100">
-                                    <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
-                                    Тег audio не поддерживается вашим браузером.
-                                </audio>
-                            </div>
-                            <div class="d-flex flex-column align-items-center justify-content-between">
-                                <small class="text-body-secondary">
-                                    Добавлен:
-                                    {{ $record->created_at->diffForHumans() }}
-                                </small>
-                                <a href="{{ route('playlist.record.destroy', [$playlist, $record]) }}" class="btn btn-sm btn-danger">Удалить</a>
-                            </div>
-                        </div>
-                    </div>
+                    @include('partial.record_list_item')
                 @empty
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Нет добавленых записей</h5>

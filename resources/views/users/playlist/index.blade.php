@@ -17,7 +17,6 @@
                     <a href="{{ route('user.playlist.show', $playlist) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{ $playlist->name }}</h5>
-{{--                            @dd($playlist->records()->orderByPivot('created_at', 'asc')->first()->name)--}}
                             @if($playlist->records()->count() > 0)
                                 <small class="text-body-secondary">Последнее изменение: {{ $playlist->records()->orderByPivot('created_at', 'desc')->first()->pivot->created_at->diffForHumans() }}</small>
                             @else

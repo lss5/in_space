@@ -10,8 +10,7 @@
                 <h2 class="m-0">{{ __('artist.menu_name') }}</h2>
                 <a href="{{ route('user.artist.create') }}" type="button" class="btn btn-secondary">{{ __('button.create') }}</a>
             </div>
-            <hr class="py-1">
-
+        <hr class="py-1">
             <div class="list-group">
             @forelse($artists as $artist)
                 <a href="{{ route('user.artist.show', $artist) }}" class="list-group-item list-group-item-action">

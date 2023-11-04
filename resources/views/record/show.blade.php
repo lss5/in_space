@@ -65,8 +65,8 @@
                         <a href="{{ route('user.purchase.create', $record) }}" class="btn btn-primary my-1">Купить</a>
                     @endif
                     @can('update', $record)
-                    <a href="{{ route('user.record.edit', $record) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
-                    <a href="{{ route('user.record.index') }}" class="btn btn-secondary mx-1">Все записи</a>
+                        <a href="{{ route('user.record.edit', $record) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>
+                        <a href="{{ route('user.record.index') }}" class="btn btn-secondary mx-1">Все записи</a>
                     @endcan
                 @endauth
                 </div>
