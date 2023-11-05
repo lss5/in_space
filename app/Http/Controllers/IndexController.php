@@ -19,8 +19,8 @@ class IndexController extends Controller
             $playlists = Auth::user()->playlists;
         }
         return view('index', [
-            'records' => Record::orderBy('created_at', 'desc')->limit(10)->get(),
-            'artists' => Artist::orderBy('created_at', 'desc')->limit(4)->get(),
+            'records' => Record::active()->orderBy('created_at', 'desc')->limit(10)->get(),
+            'artists' => Artist::active()->orderBy('created_at', 'desc')->limit(4)->get(),
             'genres' => Genre::all(),
             'playlists' => $playlists,
         ]);
