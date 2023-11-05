@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\Playlist;
 
 class StorePlaylistRequest extends FormRequest
 {
@@ -21,7 +23,6 @@ class StorePlaylistRequest extends FormRequest
         $this->merge([
             'name' => trim($this->name),
             'description' => trim($this->description),
-            'status' => 'created',
         ]);
     }
 
@@ -35,7 +36,7 @@ class StorePlaylistRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:255',
             'description' => 'nullable|string|max:4096',
-//            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096|dimensions:min_width=400,min_height=400',
+            'publicity' => ['required', 'string', Rule::in(array_keys(Playlist::$publicity))],
         ];
     }
 }

@@ -6,6 +6,7 @@
 <li class="nav-item"><a href="{{ route('record.index') }}" class="nav-link link-body-emphasis px-2">Записи</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.video') }}</a></li>
 <li class="nav-item"><a href="{{ route('genre.record.index') }}" class="nav-link link-body-emphasis px-2">Жанры</a></li>
+<li class="nav-item"><a href="{{ route('playlist.index') }}" class="nav-link link-body-emphasis px-2">Плейлисты</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.faq') }}</a></li>
 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">{{ __('menu.about') }}</a></li>
 </ul>

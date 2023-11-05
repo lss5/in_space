@@ -8,29 +8,6 @@
             <hr class="py-1">
             <form method="POST" action="{{ route('user.playlist.store') }}" enctype="multipart/form-data">
                 @csrf
-                <!-- <div class="row my-2">
-                    <div class="col-sm-12 col-lg-3">
-                        <label class="mb-0">Обложка плейлиста</label>
-                    </div>
-                    <div class="col-sm-12 col-lg-9 form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @error('image')
-                                    <small class="form-text text-danger">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-
-                                <div class="input-group">
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image">
-                                </div>
-
-                                <small class="form-text text-muted">{{ __('artist.form_image_prompt') }}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
                 <div class="row my-2">
                     <div class="col-sm-12 col-lg-3">
                         <label for="name">Название</label>
@@ -58,6 +35,24 @@
                         @enderror
                         <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5">{{ old('description') }}</textarea>
                         <small class="form-text text-muted">Описание плейлиста (на прогулку, для занятий спортом и т.д.)</small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        <label for="publicity">Публичность</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('publicity')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <select name="publicity" id="publicity" class="form-select @error('publicity') is-invalid @enderror" aria-describedby="publicityHelp">
+                        @foreach ($publicity as $key => $value)
+                            <option value="{{ $key }}" @if(old('publicity') == $key) selected @endif>{{ $value }}</option>
+                        @endforeach
+                        </select>
                     </div>
                 </div>
 

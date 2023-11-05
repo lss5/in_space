@@ -17,6 +17,7 @@ class CreatePlaylistsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->string('publicity', 36);
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
         });

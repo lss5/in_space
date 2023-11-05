@@ -35,7 +35,9 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        return view('users.playlist.create');
+        return view('users.playlist.create', [
+            'publicity' => Playlist::$publicity,
+        ]);
     }
 
     /**
@@ -50,6 +52,7 @@ class PlaylistController extends Controller
         $user->playlists()->create([
             'name' => $request->name,
             'description' => $request->description,
+            'publicity' => $request->publicity,
         ]);
 
         return redirect()->route('user.playlist.index');
@@ -78,6 +81,7 @@ class PlaylistController extends Controller
     {
         return view('users.playlist.edit', [
             'playlist' => $playlist,
+            'publicity' => Playlist::$publicity,
         ]);
     }
 
@@ -92,6 +96,7 @@ class PlaylistController extends Controller
     {
         $playlist->name = $request->name;
         $playlist->description = $request->description;
+        $playlist->publicity = $request->publicity;
         $playlist->save();
 
         return redirect()->route('user.playlist.show', $playlist);

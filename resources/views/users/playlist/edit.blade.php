@@ -39,7 +39,26 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        <label for="publicity">Публичность</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('publicity')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                        @enderror
+                        <select name="publicity" id="publicity" class="form-select @error('publicity') is-invalid @enderror" aria-describedby="publicityHelp">
+                        @foreach ($publicity as $key => $value)
+                            <option value="{{ $key }}" @if(old('publicity') == $key || $playlist->publicity == $key) selected @endif>{{ $value }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <hr class="pb-1">
+
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('button.save') }}</button>

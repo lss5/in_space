@@ -19,7 +19,8 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\User\RecordController as UserRecordController;
 use App\Http\Controllers\Admin\RecordController as AdminRecordController;
 
-use App\Http\Controllers\User\PlaylistController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\User\PlaylistController as UserPlaylistController;
 use App\Http\Controllers\User\PlaylistRecordController;
 
 
@@ -73,20 +74,25 @@ Route::prefix('admin/record')->name('admin.record.')->group(function(){
     Route::delete('/{record}', [AdminRecordController::class, 'destroy'])->name('destroy');
 });
 
-// Playlist
+// Playlist for registered user
 Route::prefix('user/playlist')->name('user.playlist.')->group(function(){
-    Route::get('/', [PlaylistController::class, 'index'])->name('index');
-    Route::get('/create', [PlaylistController::class, 'create'])->name('create');
-    Route::post('/', [PlaylistController::class, 'store'])->name('store');
-    Route::get('/{playlist}', [PlaylistController::class, 'show'])->name('show');
-    Route::get('/{playlist}/edit', [PlaylistController::class, 'edit'])->name('edit');
-    Route::put('/{playlist}', [PlaylistController::class, 'update'])->name('update');
-    Route::delete('/{playlist}', [PlaylistController::class, 'destroy'])->name('destroy');
+    Route::get('/', [UserPlaylistController::class, 'index'])->name('index');
+    Route::get('/create', [UserPlaylistController::class, 'create'])->name('create');
+    Route::post('/', [UserPlaylistController::class, 'store'])->name('store');
+    Route::get('/{playlist}', [UserPlaylistController::class, 'show'])->name('show');
+    Route::get('/{playlist}/edit', [UserPlaylistController::class, 'edit'])->name('edit');
+    Route::put('/{playlist}', [UserPlaylistController::class, 'update'])->name('update');
+    Route::delete('/{playlist}', [UserPlaylistController::class, 'destroy'])->name('destroy');
 });
 // Playlist relations with Record
 Route::prefix('user/playlist')->name('playlist.record.')->group(function(){
     Route::get('/{playlist}/add/{record}', [PlaylistRecordController::class, 'update'])->name('update');
     Route::get('/{playlist}/remove/{record}', [PlaylistRecordController::class, 'destroy'])->name('destroy');
+});
+// Playlist for all users
+Route::prefix('playlist')->name('playlist.')->group(function(){
+    Route::get('/', [PlaylistController::class, 'index'])->name('index');
+    Route::get('/{playlist}', [PlaylistController::class, 'show'])->name('show');
 });
 
 // Profile

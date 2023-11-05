@@ -12,6 +12,12 @@ class Playlist extends Model
     protected $fillable = [
         'name',
         'description',
+        'publicity',
+    ];
+
+    public static $publicity = [
+        'person' => 'Личный',
+        'public' => 'Публичный',
     ];
 
     public function user()
