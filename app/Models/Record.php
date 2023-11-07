@@ -107,6 +107,11 @@ class Record extends Model
         return $query->where('content_type', 'video');
     }
 
+    public function scopePublic(Builder $query)
+    {
+        return $query->where('publicity', 'public');
+    }
+
     public function delete()
     {
         // Deleting relations Images

@@ -21,7 +21,7 @@ class RecordController extends Controller
         $user = Auth::user();
 
         return view('record.audio.index', [
-            'records' => Record::audio()->active()->orderBy('created_at', 'desc')->get(),
+            'records' => Record::audio()->public()->active()->orderBy('created_at', 'desc')->get(),
             'playlists' => $user ? $user->playlists : [],
         ]);
     }
@@ -36,7 +36,7 @@ class RecordController extends Controller
         $user = Auth::user();
 
         return view('record.video.index', [
-            'records' => Record::video()->active()->orderBy('created_at', 'desc')->get(),
+            'records' => Record::video()->public()->active()->orderBy('created_at', 'desc')->get(),
             'playlists' => $user ? $user->playlists : [],
         ]);
     }
