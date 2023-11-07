@@ -9,36 +9,48 @@
                 <form method="POST" action="{{ route('admin.record.update', $record) }}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-
                     <div class="row my-2">
                         <div class="col-sm-12 col-lg-3">
                             <label for="name">{{ __('record.form_create_name') }}</label>
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
-                        @error('name')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
-                        @enderror
+                            @error('name')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                             <input name="name" value="{{ old('name') ??  $record->name }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row my-2">
                         <div class="col-sm-12 col-lg-3">
                             <label for="status">Статус</label>
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                             @error('status')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
+                                <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" aria-describedby="statusHelp">
-                            @foreach ($statuses as $status)
-                                <option value="{{ $status }}" @if(old('status') == $status || $record->status == $status) selected @endif>{{ $status }}</option>
-                            @endforeach
+                                @foreach ($statuses as $key => $value)
+                                    <option value="{{ $key }}" @if(old('status') == $key || $record->status == $key) selected @endif>{{ $value }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row my-2">
+                        <div class="col-sm-12 col-lg-3">
+                            <label>Доступ</label>
+                        </div>
+                        <div class="col-sm-12 col-lg-9 form-group">
+                            @error('publicity')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                            <select class="form-select @error('publicity') is-invalid @enderror" aria-describedby="ContentTypeHelp" name="publicity" id="publicity">
+                                @foreach ($publicity as $key => $value)
+                                    <option value="{{ $key }}" @if(old('publicity') == $key || $record->publicity == $key) selected @endif>{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            <small class="form-text text-muted">Доступность записи</small>
                         </div>
                     </div>
 
@@ -48,9 +60,7 @@
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                             @error('genre')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
+                                <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                             <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" id="genre" multiple size="4" aria-label="Genre">
                                 @foreach ($genres as $genre)

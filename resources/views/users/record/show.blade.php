@@ -17,19 +17,28 @@
                 </p>
                 <p>Описание: {{ $record->description }}</p>
                 <p>Жанр:
-                @forelse($record->genres as $genre)
-                    {{ $genre->name }}
-                @empty
-                    Неизвестен
-                @endforelse
+                    @forelse($record->genres as $genre)
+                        {{ $genre->name }}
+                    @empty
+                        Неизвестен
+                    @endforelse
                 </p>
                 <p>Год: {{ $record->created_at->format('Y') }}</p>
                 <p>Воспроизведений: {{ $plays }}</p>
-                <audio controls class="w-100">
-                    <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
-                    Тег audio не поддерживается вашим браузером.
-                </audio>
-                <hr class="py-1">
+                <p>Тип записи: {{ App\Models\Record::$content_types[$record->content_type] }}</p>
+                <p>Доступность: {{ App\Models\Record::$publicity[$record->publicity] }}</p>
+                @if ($record->content_type == 'video')
+                    <video src="{{ asset('storage/'.$record->link) }}" controls="controls" style="max-height: 500px">
+                        Тег video не поддерживается вашим браузером. 
+                        {{-- <a href="video/duel.mp4">Скачайте видео</a>. --}}
+                    </video>
+                @else
+                    <audio controls class="w-100">
+                        <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
+                        Тег audio не поддерживается вашим браузером.
+                    </audio>
+                @endif
+            <hr class="py-1">
                 <div class="d-flex flex-row align-items-center">
                 @auth
                     @if($like)

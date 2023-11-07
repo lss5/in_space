@@ -27,6 +27,8 @@ class CreateRecordsTable extends Migration
             $table->string('extension');
             $table->text('description')->nullable();
             $table->string('status', 36)->default('created');
+            $table->string('content_type', 36);
+            $table->string('publicity', 36);
         });
     }
 

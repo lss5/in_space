@@ -12,16 +12,31 @@ use Illuminate\Support\Facades\Auth;
 class RecordController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing Record type of Audio.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function music()
     {
         $user = Auth::user();
 
-        return view('record.index', [
-            'records' => Record::active()->orderBy('created_at', 'desc')->get(),
+        return view('record.audio.index', [
+            'records' => Record::audio()->active()->orderBy('created_at', 'desc')->get(),
+            'playlists' => $user ? $user->playlists : [],
+        ]);
+    }
+
+    /**
+     * Display a listing Record type of video.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function video()
+    {
+        $user = Auth::user();
+
+        return view('record.video.index', [
+            'records' => Record::video()->active()->orderBy('created_at', 'desc')->get(),
             'playlists' => $user ? $user->playlists : [],
         ]);
     }

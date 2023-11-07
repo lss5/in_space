@@ -36,13 +36,11 @@ class ArtistController extends Controller
     {
         $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'description' => 'nullable|string|max:61440',
             'genre'  => 'required|array|exists:genres,id',
-            'status' => ['required', 'string', Rule::in(Artist::$statuses)],
+            'status' => ['required', 'string', Rule::in(array_keys(Artist::$statuses))],
         ]);
 
         $artist->name = $request->name;
-        $artist->description = $request->description;
         $artist->status = $request->status;
         $artist->save();
 

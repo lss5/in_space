@@ -40,6 +40,7 @@ class RecordController extends Controller
             'record' => $record,
             'genres' => Genre::all(),
             'statuses' => Record::$statuses,
+            'publicity' => Record::$publicity,
         ]);
     }
 
@@ -55,11 +56,13 @@ class RecordController extends Controller
         $request->validate([
             'name' => 'required|string|min:2|max:255',
             'genre'  => 'required|array|exists:genres,id',
-            'status' => ['required', 'string', Rule::in(Record::$statuses)],
+            'status' => ['required', 'string', Rule::in(array_keys(Record::$statuses))],
+            'publicity' => ['required', 'string', Rule::in(array_keys(Record::$publicity))],
         ]);
 
         $record->name = $request->name;
         $record->status = $request->status;
+        $record->publicity = $request->publicity;
         $record->save();
         $record->genres()->detach();
         $record->genres()->attach($request->genre);

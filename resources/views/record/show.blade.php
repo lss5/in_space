@@ -25,10 +25,20 @@
                 </span>
                 <span>Год: {{ $record->created_at->format('Y') }}</span>
                 <span>Воспроизведений: {{ $plays }}</span>
-                <audio controls class="w-100">
-                    <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
-                    Тег audio не поддерживается вашим браузером.
-                </audio>
+                <p>
+                    Тип записи: {{ App\Models\Record::$content_types[$record->content_type] }}
+                </p>
+                @if ($record->content_type == 'video')
+                    <video src="{{ asset('storage/'.$record->link) }}" controls="controls" style="max-height: 500px">
+                        Тег video не поддерживается вашим браузером. 
+                        {{-- <a href="video/duel.mp4">Скачайте видео</a>. --}}
+                    </video>
+                @else
+                    <audio controls class="w-100">
+                        <source src="{{ asset('storage/'.$record->link) }}" type="audio/mpeg">
+                        Тег audio не поддерживается вашим браузером.
+                    </audio>
+                @endif
                 @auth
                 <hr class="py-1">
                 <div class="d-flex flex-row align-items-center">

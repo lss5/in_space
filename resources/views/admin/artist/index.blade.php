@@ -15,7 +15,7 @@
                         <small class="text-body-secondary">Создан: {{ $artist->created_at->format('d.m.Y') }}</small>
                     </div>
                     <div class="d-flex w-100 justify-content-between">
-                        <small class="">Статус: {{ $artist->status }}</small>
+                        <small class="">Статус: {{ App\Models\Artist::$statuses[$artist->status] }}</small>
                         <small class="text-body-secondary">Записей: {{ $artist->records()->count() }}</small>
                     </div>
                 </a>
@@ -32,7 +32,6 @@
                         </small>
                     </div>
                 </a>
-
             @endforelse
             </div>
         </div>

@@ -10,20 +10,30 @@
                 @method('PUT')
                 @csrf
 
+                <div class="row my-2">
+                    <div class="col-sm-12 col-lg-3">
+                        <label for="name">{{ __('artist.form_name') }}</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('name')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <input name="name" value="{{ old('name') ??  $artist->name }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
                         <label for="status">Статус</label>
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
                         @error('status')
-                        <small class="form-text text-danger">
-                            {{ $message }}
-                        </small>
+                            <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                         <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" aria-describedby="statusHelp">
-                        @foreach ($statuses as $status)
-                            <option value="{{ $status }}" @if(old('status') == $status || $artist->status == $status) selected @endif>{{ $status }}</option>
-                        @endforeach
+                            @foreach ($statuses as $key => $value)
+                                <option value="{{ $key }}" @if(old('status') == $key || $artist->status == $key) selected @endif>{{ $value }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -34,9 +44,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-9 form-group">
                         @error('genre')
-                        <small class="form-text text-danger">
-                            {{ $message }}
-                        </small>
+                            <small class="form-text text-danger"></small>
                         @enderror
                         <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" id="genre" multiple size="4" aria-label="Genre">
                             @foreach ($genres as $genre)
@@ -46,36 +54,7 @@
                     </div>
                 </div>
 
-                <div class="row my-2">
-                    <div class="col-sm-12 col-lg-3">
-                        <label for="name">{{ __('artist.form_name') }}</label>
-                    </div>
-                    <div class="col-sm-12 col-lg-9 form-group">
-                        @error('name')
-                        <small class="form-text text-danger">
-                            {{ $message }}
-                        </small>
-                        @enderror
-                        <input name="name" value="{{ old('name') ??  $artist->name }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
-                    </div>
-                </div>
-
-                <div class="row my-2">
-                    <div class="col-sm-12 col-lg-3">
-                        <label for="description">{{ __('artist.form_description') }}</label>
-                    </div>
-                    <div class="col-sm-12 col-lg-9 form-group">
-                        @error('description')
-                        <small class="form-text text-danger">
-                            {{ $message }}
-                        </small>
-                        @enderror
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5">{{ old('description') }}</textarea>
-                    </div>
-                </div>
-
                 <hr class="pb-1">
-
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-success mx-1" role="button" aria-pressed="true">{{ __('button.save') }}</button>

@@ -18,12 +18,23 @@ class Record extends Model
     protected $fillable = [
         'name',
         'description',
+        'publicity',
     ];
 
     public static $statuses = [
-        'created',
-        'active',
-        'banned',
+        'created' => 'Создан',
+        'active' => 'Активный',
+        'banned' => 'Заблокирован',
+    ];
+
+    public static $content_types = [
+        'audio' => 'Аудиозапись',
+        'video' => 'Видеозапись',
+    ];
+
+    public static $publicity = [
+        'person' => 'Личный',
+        'public' => 'Для всех',
     ];
 
     public function artist()
@@ -84,6 +95,16 @@ class Record extends Model
     public function scopeActive(Builder $query)
     {
         return $query->where('status', 'active');
+    }
+    
+    public function scopeAudio(Builder $query)
+    {
+        return $query->where('content_type', 'audio');
+    }
+
+    public function scopeVideo(Builder $query)
+    {
+        return $query->where('content_type', 'video');
     }
 
     public function delete()

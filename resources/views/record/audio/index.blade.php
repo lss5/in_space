@@ -6,13 +6,13 @@
     <div class="row bg-white py-5">
         <div class="col-12 col-lg-8 mx-auto">
             <h1>Все записи</h1>
-        <hr class="py-1">
+            <hr class="py-1">
             <div class="list-group">
             @forelse($records as $record)
                 @include('partial.record_list_item')
             @empty
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Нет загруженных записей</h5>
+                    <h5 class="mb-1">Нет загруженных аудиозаписей</h5>
                     <small class="text-body-secondary text-muted">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
                             <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>

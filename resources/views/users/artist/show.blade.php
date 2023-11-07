@@ -20,7 +20,8 @@
                     @empty
                         Неизвестен
                     @endforelse
-                    <span>{{ $artist->description }}</span>
+                    <span>Описание: {{ $artist->description }}</span>
+                    <span>Статус: {{ App\Models\Artist::$statuses[$artist->status] }}</span>
                     <div class="d-flex flex-row">
                     @can('update', $artist)
                         <a href="{{ route('user.artist.edit', $artist) }}" class="btn btn-secondary mx-1">{{ __('button.edit') }}</a>

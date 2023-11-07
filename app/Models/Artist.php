@@ -16,9 +16,9 @@ class Artist extends Model
     ];
 
     public static $statuses = [
-        'created',
-        'active',
-        'banned',
+        'created' => 'Создан',
+        'active' => 'Активный',
+        'banned' => 'Заблокирован',
     ];
 
     public function records()

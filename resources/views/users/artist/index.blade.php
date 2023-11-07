@@ -20,7 +20,7 @@
                     </div>
                     <p class="mb-1">{{ $artist->description }}</p>
                     <div class="d-flex w-100 justify-content-between">
-                        <small class="">Статус: {{ $artist->status }}</small>
+                        <small class="">Статус: {{ App\Models\Artist::$statuses[$artist->status] }}</small>
                         <small class="text-body-secondary">Записей: {{ $artist->records()->count() }}</small>
                     </div>
                 </a>

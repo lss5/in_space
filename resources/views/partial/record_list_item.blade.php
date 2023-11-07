@@ -5,6 +5,7 @@
         <img src="{{ asset('images/no_artist.jpeg') }}" alt="{{ $record->name }}" class="img img-fluid" style="max-width: 100px;">
     @endif
     <div class="w-100 ms-3">
+        {{-- 1 строка --}}
         <div class="d-flex w-100 justify-content-between align-items-center">
             <a href="{{ route('record.show', $record) }}" class="text-decoration-none lead">
                 {{ ($record->artist ? $record->artist->name : 'Неизвестен') }} - {{ $record->name }} ({{ $record->created_at->format('Y') }})
@@ -29,28 +30,23 @@
                 @php $default_date = false @endphp
             @endif
             @if (request()->route()->named('user.purchase.*'))
-                <small class="text-body-secondary">
-                    Куплен: {{ $purchase->created_at->diffForHumans() }}
-                </small>
+                <small class="text-body-secondary">Куплен: {{ $purchase->created_at->diffForHumans() }}</small>
                 @php $default_date = false @endphp
             @endif
             @if ($default_date)
-                <small class="text-body-secondary">
-                    Добавлен: {{ $record->created_at->diffForHumans() }}
-                </small>
+                <small class="text-body-secondary">Добавлен: {{ $record->created_at->diffForHumans() }}</small>
             @endif
         </div>
+
         @if (request()->route()->named('user.record.*'))
             <div class="d-flex w-100 justify-content-between align-items-center">
-                <small class="text-body-secondary">
-                    Статус: {{ $record->status }}
-                </small>
-                <small class="text-body-secondary">
-                    Воспроизведений: {{ $record->plays()->sum('count') }}
-                </small>
-                <small class="text-body-secondary">
-                    Куплен: {{ $record->purchasers->count() }} раз(a)
-                </small>
+                <small class="text-body-secondary">Тип: {{ App\Models\Record::$content_types[$record->content_type] }}</small>
+                <small class="text-body-secondary">Доступность: {{ App\Models\Record::$publicity[$record->publicity] }}</small>
+                <small class="text-body-secondary">Воспроизведений: {{ $record->plays()->sum('count') }}</small>
+            </div>
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <small class="text-body-secondary">Статус: {{ App\Models\Record::$statuses[$record->status] }}</small>
+                <small class="text-body-secondary">Куплен: {{ $record->purchasers->count() }} раз(a)</small>
             </div>
         @endif
         <div class="w-100">
@@ -63,7 +59,7 @@
             @auth
                 @if (request()->route()->named('admin.*'))
                     <small class="text-body-secondary">
-                        Статус: {{ $record->status }}
+                        Статус: {{ App\Models\Record::$statuses[$record->status] }}
                     </small>
                     @can('moder','admin')
                         <a href="{{ route('admin.record.edit', $record) }}" class="btn btn-sm btn-warning mx-1">{{ __('button.edit') }}</a>

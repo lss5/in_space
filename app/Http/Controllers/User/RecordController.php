@@ -50,6 +50,7 @@ class RecordController extends Controller
             return view('users.record.create', [
                 'artists' => $artists,
                 'genres' => Genre::all(),
+                'publicity' => Record::$publicity,
             ]);
         } else {
             return redirect()->route('user.artist.index')->with('warning', 'Для создания записи необходимо добавить Артиста');
@@ -64,15 +65,19 @@ class RecordController extends Controller
      */
     public function store(StoreRecordRequest $request)
     {
+        $video_ext = ['mpeg','ogg','mp4','webm','3gp','mov','flv','avi','wmv'];
+        $audio_ext = ['mp3','ogg','flac'];
+
         $record = new Record();
-        $record->name = $request->name;
-        $record->description = $request->description;
-        $record->link = $request->file('audio')->store('user/'.$record->user_id.'/audio/', 'public');
-        $record->extension = $request->file('audio')->getClientOriginalExtension();
         $record->user()->associate(Auth::user());
         $record->artist()->associate($request->artist);
+        $record->name = $request->name;
+        $record->description = $request->description;
+        $record->publicity = $request->publicity;
+        $record->link = $request->file('record')->store('user/'.$record->user_id.'/record/', 'public');
+        $record->extension = strtolower($request->file('record')->getClientOriginalExtension());
+        $record->content_type = (in_array($record->extension, $video_ext) ? 'video' : 'audio');
         $record->save();
-
         $record->genres()->attach($request->genre);
 
         if ($request->hasFile('image')) {
@@ -128,6 +133,7 @@ class RecordController extends Controller
         return view('users.record.edit', [
             'record' => $record,
             'genres' => Genre::all(),
+            'publicity' => Record::$publicity,
         ]);
     }
 
@@ -153,6 +159,7 @@ class RecordController extends Controller
 
         $record->name = $request->name;
         $record->description = $request->description;
+        $record->publicity = $request->publicity;
         $record->save();
         $record->genres()->detach();
         $record->genres()->attach($request->genre);

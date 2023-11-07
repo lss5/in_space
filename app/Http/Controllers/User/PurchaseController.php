@@ -79,7 +79,7 @@ class PurchaseController extends Controller
             return Storage::download($purchase->record->link, $purchase->record->artist->name.' - '.$purchase->record->name.'.'.$purchase->record->extension);
         }
 
-        return view('record.show', $purchase->record);
+        return view('record.audio.show', $purchase->record);
     }
 
     /**

@@ -53,7 +53,8 @@ Route::prefix('admin/artist')->name('admin.artist.')->group(function(){
 
 // Record for all users
 Route::prefix('record')->name('record.')->group(function(){
-    Route::get('/', [RecordController::class, 'index'])->name('index');
+    Route::get('/music', [RecordController::class, 'music'])->name('music');
+    Route::get('/video', [RecordController::class, 'video'])->name('video');
     Route::get('/{record}', [RecordController::class, 'show'])->name('show');
 });
 // Record for registered user

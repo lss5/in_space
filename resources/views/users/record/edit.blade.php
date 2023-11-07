@@ -15,9 +15,7 @@
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                             @error('genre')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
+                                <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                             <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" id="genre" multiple size="4" aria-label="Genre">
                                 @foreach ($genres as $genre)
@@ -30,22 +28,18 @@
 
                     <div class="row my-2">
                         <div class="col-sm-12 col-lg-3">
-                            <label class="mb-0">{{ __('record.form_image') }}</label>
+                            <label class="mb-0">{{ __('record.form_create_image') }}</label>
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                             <div class="row">
                                 <div class="col-sm-12">
                                     @error('image')
-                                    <small class="form-text text-danger">
-                                        {{ $message }}
-                                    </small>
+                                        <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
-
                                     <div class="input-group">
                                         <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image">
                                     </div>
-
-                                    <small class="form-text text-muted">{{ __('record.form_image_prompt') }}</small>
+                                    <small class="form-text text-muted">{{ __('record.form_create_image_prompt') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -53,31 +47,44 @@
 
                     <div class="row my-2">
                         <div class="col-sm-12 col-lg-3">
-                            <label for="name">{{ __('record.form_name') }}</label>
+                            <label for="name">{{ __('record.form_create_name') }}</label>
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                         @error('name')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
+                            <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
-                            <input name="name" value="{{ old('name') ??  $record->name }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
-                            <small class="form-text text-muted">{{ __('record.form_name_prompt') }}</small>
+                        <input name="name" value="{{ old('name') ??  $record->name }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
+                        <small class="form-text text-muted">{{ __('record.form_create_name_prompt') }}</small>
                         </div>
                     </div>
 
                     <div class="row my-2">
                         <div class="col-sm-12 col-lg-3">
-                            <label for="description">{{ __('record.form_description') }}</label>
+                            <label for="description">{{ __('record.form_create_description') }}</label>
                         </div>
                         <div class="col-sm-12 col-lg-9 form-group">
                         @error('description')
-                            <small class="form-text text-danger">
-                                {{ $message }}
-                            </small>
+                            <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
-                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5">{{ old('description') }}</textarea>
-                            <small class="form-text text-muted">{{ __('record.form_description_prompt') }}</small>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5">{{ old('description') }}</textarea>
+                        <small class="form-text text-muted">{{ __('record.form_create_description_prompt') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-3">
+                            <label>Доступ</label>
+                        </div>
+                        <div class="col-sm-12 col-lg-9 form-group">
+                            @error('publicity')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                            <select class="form-select @error('publicity') is-invalid @enderror" aria-describedby="ContentTypeHelp" name="publicity" id="publicity">
+                                @foreach ($publicity as $key => $value)
+                                    <option value="{{ $key }}" @if(old('publicity') == $key || $record->publicity == $key) selected @endif>{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            <small class="form-text text-muted">Доступность записи</small>
                         </div>
                     </div>
 
