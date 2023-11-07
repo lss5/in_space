@@ -33,13 +33,13 @@ class LikeController extends Controller
      */
     public function create(Record $record)
     {
-        $user = Auth::user();
+        $record->dislikes()->forUser(Auth::user())->delete();
 
         $record->likes()->firstOrCreate([
-            'user_id' => $user->id,
+            'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('record.show', $record);
+        return redirect()->back();
     }
 
     /**
@@ -51,7 +51,6 @@ class LikeController extends Controller
     public function destroy(Like $like)
     {
         $like->delete();
-
-        return redirect()->route('record.show', $like->liked);
+        return redirect()->back();
     }
 }

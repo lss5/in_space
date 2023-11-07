@@ -33,22 +33,14 @@ class DislikeController extends Controller
      */
     public function create(Record $record)
     {
+        $record->likes()->forUser(Auth::user())->delete();
+
         $record->dislikes()->firstOrCreate([
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('record.show', $record);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Dislike  $dislike
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Dislike $dislike)
-    {
-        //
+        // return redirect()->route('record.show', $record);
+        return redirect()->back();
     }
 
     /**
@@ -60,7 +52,6 @@ class DislikeController extends Controller
     public function destroy(Dislike $dislike)
     {
         $dislike->delete();
-
-        return redirect()->route('record.show', $dislike->disliked);
+        return redirect()->back();
     }
 }
