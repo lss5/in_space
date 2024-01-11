@@ -71,6 +71,7 @@ class RecordController extends Controller
         $record = new Record();
         $record->user()->associate(Auth::user());
         $record->artist()->associate($request->artist);
+        $record->year = $request->year;
         $record->name = $request->name;
         $record->description = $request->description;
         $record->publicity = $request->publicity;

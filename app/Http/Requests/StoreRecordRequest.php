@@ -35,6 +35,7 @@ class StoreRecordRequest extends FormRequest
     public function rules()
     {
         return [
+            'year' => 'required|integer|min:1920|max:2030',
             'name' => 'required|string|min:2|max:255',
             'description' => 'nullable|string|max:61440',
             'artist' => 'required|integer|exists:artists,id',
@@ -54,6 +55,7 @@ class StoreRecordRequest extends FormRequest
     public function messages()
     {
         return [
+            'year.min' => 'Год должен быть в разумных пределах',
             'required' => 'Поле :attribute обязательно для заполнения',
             'record.required' => 'Выберите файл записи',
             'name.required' => 'Необходимо ввести название записи',

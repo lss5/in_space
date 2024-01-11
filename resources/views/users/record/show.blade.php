@@ -23,7 +23,8 @@
                         Неизвестен
                     @endforelse
                 </p>
-                <p>Год: {{ $record->created_at->format('Y') }}</p>
+                <p>Год: {{ $record->year }}</p>
+                <p>Дата создания: {{ $record->created_at->format('d m Y') }}</p>
                 <p>Воспроизведений: {{ $plays }}</p>
                 <p>Тип записи: {{ App\Models\Record::$content_types[$record->content_type] }}</p>
                 <p>Доступность: {{ App\Models\Record::$publicity[$record->publicity] }}</p>

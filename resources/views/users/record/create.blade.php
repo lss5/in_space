@@ -30,12 +30,25 @@
                         @error('artist')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
-                        <select class="form-select @error('artist') is-invalid @enderror" aria-describedby="artistHelp" name="artist" id="artist">
+                        <select class="form-select @error('artist') is-invalid @enderror" name="artist" id="artist">
                             @foreach ($artists as $artist)
                                 <option value="{{ $artist->id }}" @if(old('artist') == $artist->id) selected @endif>{{ $artist->name }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-muted">Выберите Артиста из списка доступных</small>
+                    </div>
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-sm-12 col-lg-3">
+                        <label>Год</label>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 form-group">
+                        @error('year')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <input name="year" value="{{ old('year') }}" type="number" min="1920" max="2030" class="form-control @error('year') is-invalid @enderror" id="year">
+                        <small class="form-text text-muted">Год издания</small>
                     </div>
                 </div>
 
@@ -47,7 +60,7 @@
                         @error('name')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
-                        <input name="name" value="{{ old('name') }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="nameHelp">
+                        <input name="name" value="{{ old('name') }}" type="text" class="form-control @error('name') is-invalid @enderror" id="name">
                         <small class="form-text text-muted">{{ __('record.form_create_name_prompt') }}</small>
                     </div>
                 </div>
@@ -103,7 +116,7 @@
                         @error('publicity')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
-                        <select class="form-select @error('publicity') is-invalid @enderror" aria-describedby="ContentTypeHelp" name="publicity" id="publicity">
+                        <select class="form-select @error('publicity') is-invalid @enderror" name="publicity" id="publicity">
                             @foreach ($publicity as $key => $value)
                                 <option value="{{ $key }}" @if(old('publicity') == $key) selected @endif>{{ $value }}</option>
                             @endforeach

@@ -10,7 +10,7 @@
         {{-- 1 строка --}}
         <div class="d-flex w-100 justify-content-between align-items-center">
             <a href="{{ route('record.show', $record) }}" class="text-decoration-none lead">
-                {{ ($record->artist ? $record->artist->name : 'Неизвестен') }} - {{ $record->name }} ({{ $record->created_at->format('Y') }})
+                {{ ($record->artist ? $record->artist->name : 'Неизвестен') }} - {{ $record->name }} ({{ $record->year }})
             </a>
             @php $default_date = true @endphp
             @if (request()->route()->named('user.like.*'))

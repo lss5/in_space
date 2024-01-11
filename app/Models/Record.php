@@ -19,6 +19,7 @@ class Record extends Model
         'name',
         'description',
         'publicity',
+        'year',
     ];
 
     public static $statuses = [
