@@ -22,7 +22,6 @@ class PlaylistRecordController extends Controller
      */
     public function update(Request $request, Playlist $playlist, Record $record)
     {
-        // dd($playlist);
         if ($request->user()->can('update', $playlist)){
             $playlist->records()->syncWithoutDetaching($record);
 

@@ -93,6 +93,11 @@ class Record extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    public function albums()
+    {
+        return $this->belongsToMany(Album::class);
+    }
+
     public function scopeActive(Builder $query)
     {
         return $query->where('status', 'active');

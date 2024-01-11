@@ -90,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany(Purchase::class);
     }
 
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
     public function hasAnyRoles($roles)
     {
         if ($this->roles()->whereIn('uniq_name', $roles)->first()) {

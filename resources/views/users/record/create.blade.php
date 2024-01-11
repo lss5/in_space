@@ -103,7 +103,7 @@
                     @error('image')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
-                    <input type="file" name="image" id="image" accept=".jpeg,.png,.jpg,.gif,.svg" class="form-control @error('image') is-invalid @enderror">
+                    <input type="file" name="image" id="image" accept=".jpeg,.png,.jpg,.gif,.svg,.webp" class="form-control @error('image') is-invalid @enderror">
                     <small class="form-text text-muted">{{ __('record.form_create_image_prompt') }}</small>
                     </div>
                 </div>

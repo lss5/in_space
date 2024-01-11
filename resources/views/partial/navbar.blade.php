@@ -31,6 +31,7 @@
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <a href="{{ route('user.profile.show') }}" class="dropdown-item">{{ __('profile.menu_name') }}</a>
+                    <a href="{{ route('user.album.index') }}" class="dropdown-item">Альбомы</a>
                     <a href="{{ route('user.artist.index') }}" class="dropdown-item">{{ __('artist.menu_name') }}</a>
                     <a href="{{ route('user.record.index') }}" class="dropdown-item">{{ __('record.menu_name') }}</a>
                     <a href="{{ route('user.playlist.index') }}" class="dropdown-item">{{ __('playlist.menu_name') }}</a>

@@ -11,6 +11,10 @@ use App\Http\Controllers\User\PurchaseController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\User\AlbumController as UserAlbumController;
+use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
+
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\User\ArtistController as UserArtistController;
 use App\Http\Controllers\Admin\ArtistController as AdminArtistController;
@@ -144,3 +148,26 @@ Route::prefix('admin/users')->name('admin.user.')->group(function(){
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
 });
+
+// Album for all users
+Route::prefix('album')->name('album.')->group(function(){
+    // Route::get('/', [AlbumController::class, 'index'])->name('index');
+    Route::get('/{album}', [AlbumController::class, 'show'])->name('show');
+});
+// Album for registered user
+Route::prefix('user/album')->name('user.album.')->group(function(){
+    Route::get('/', [UserAlbumController::class, 'index'])->name('index');
+    Route::get('/create', [UserAlbumController::class, 'create'])->name('create');
+    Route::post('/', [UserAlbumController::class, 'store'])->name('store');
+    Route::get('/{album}', [UserAlbumController::class, 'show'])->name('show');
+    Route::get('/{album}/edit', [UserAlbumController::class, 'edit'])->name('edit');
+    Route::put('/{album}', [UserAlbumController::class, 'update'])->name('update');
+    Route::delete('/{album}', [UserAlbumController::class, 'destroy'])->name('destroy');
+});
+// Album for Administrator
+// Route::prefix('admin/artist')->name('admin.artist.')->group(function(){
+//     Route::get('/', [AdminArtistController::class, 'index'])->name('index');
+//     Route::get('/{artist}/edit', [AdminArtistController::class, 'edit'])->name('edit');
+//     Route::put('/{artist}', [AdminArtistController::class, 'update'])->name('update');
+//     Route::delete('/{artist}', [AdminArtistController::class, 'destroy'])->name('destroy');
+// });

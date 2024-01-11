@@ -59,6 +59,11 @@ class Artist extends Model
         return $this->morphToMany(Genre::class, 'genreable');
     }
 
+    public function albums()
+    {
+        return $this->belongsToMany(Album::class);
+    }
+
     public function scopeActive(Builder $query)
     {
         return $query->where('status', 'active');
@@ -66,8 +71,6 @@ class Artist extends Model
 
     public function delete()
     {
-        // TODO: delete relation Likes and Dislikes
-
         //Deleting relations Records
         foreach ($this->images as $image) {
             $image->delete();
@@ -78,6 +81,8 @@ class Artist extends Model
             $record->delete();
         }
 
+        $this->likes()->detach();
+        $this->dislikes()->detach();
 
         return parent::delete();
     }
