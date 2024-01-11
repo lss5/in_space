@@ -1,6 +1,8 @@
 <div class="list-group-item d-flex justify-content-between align-items-start pt-3">
     @if($record->images->count() > 0)
         <img src="{{ asset('storage/'.$record->latestImage->link) }}" alt="{{ $record->name }}" class="img img-fluid" style="max-width: 100px;">
+    @elseif($record->artist->images()->count() > 0)
+        <img src="{{ asset('storage/'.$record->artist->latestImage->link) }}" alt="{{ $record->name }}" class="img img-fluid" style="max-width: 100px;">
     @else
         <img src="{{ asset('images/no_artist.jpeg') }}" alt="{{ $record->name }}" class="img img-fluid" style="max-width: 100px;">
     @endif
